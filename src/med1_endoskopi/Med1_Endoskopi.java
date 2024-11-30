@@ -4,7 +4,7 @@
  */
 package med1_endoskopi;
 
-import med1_endoskopi.view.Login;
+import View.Login;
 
 
 
