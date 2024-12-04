@@ -2,6 +2,7 @@
 package Dao;
 
 import Model.AssesmentModel;
+import Model.ImagesModel;
 import java.util.List;
 
 public interface AssesmentDao {
