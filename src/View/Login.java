@@ -4,18 +4,41 @@
  */
 package View;
 
+import Controller.LoginController;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 /**
  *
  * @author user
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+    LoginController controller;
     public Login() {
         initComponents();
+        controller = new LoginController(this);
     }
+
+    public JPasswordField getInputPassword() {
+        return inputPassword;
+    }
+
+    public void setInputPassword(JPasswordField inputPassword) {
+        this.inputPassword = inputPassword;
+    }
+
+    public JTextField getInputUsername() {
+        return inputUsername;
+    }
+
+    public void setInputUsername(JTextField inputUsername) {
+        this.inputUsername = inputUsername;
+    }
+
+
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,7 +54,7 @@ public class Login extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         Left = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        inputEmail = new javax.swing.JTextField();
+        inputUsername = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         inputPassword = new javax.swing.JPasswordField();
@@ -69,20 +92,20 @@ public class Login extends javax.swing.JFrame {
         );
 
         jPanel1.add(Right);
-        Right.setBounds(0, 0, 400, 0);
+        Right.setBounds(0, 0, 400, 500);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel1.setText("LOGIN");
 
-        inputEmail.setToolTipText("");
-        inputEmail.setBorder(null);
-        inputEmail.addActionListener(new java.awt.event.ActionListener() {
+        inputUsername.setToolTipText("");
+        inputUsername.setBorder(null);
+        inputUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputEmailActionPerformed(evt);
+                inputUsernameActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Email");
+        jLabel2.setText("Username");
 
         jLabel3.setText("Password");
 
@@ -97,6 +120,11 @@ public class Login extends javax.swing.JFrame {
         btnLogin.setBackground(new java.awt.Color(102, 102, 0));
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Don't have an account? Please ");
 
@@ -118,8 +146,8 @@ public class Login extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, LeftLayout.createSequentialGroup()
                             .addGap(46, 46, 46)
                             .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(inputUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(LeftLayout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,7 +177,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(58, 58, 58)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -184,9 +212,9 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void inputEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputEmailActionPerformed
+    private void inputUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputEmailActionPerformed
+    }//GEN-LAST:event_inputUsernameActionPerformed
 
     private void inputPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPasswordActionPerformed
         // TODO add your handling code here:
@@ -194,12 +222,16 @@ public class Login extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
-        Register registerFrane = new Register();
-        registerFrane.setVisible(true);
-        registerFrane.pack();
-        registerFrane.setLocationRelativeTo(null);
+        RegisterUser registerUser = new RegisterUser();
+        registerUser.setVisible(true);
+        registerUser.pack();
+        registerUser.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        controller.login();
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,8 +273,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel Right;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
-    private javax.swing.JTextField inputEmail;
     private javax.swing.JPasswordField inputPassword;
+    private javax.swing.JTextField inputUsername;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

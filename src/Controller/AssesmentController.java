@@ -8,6 +8,7 @@ import Dao.AssesmentDao;
 import Dao.AssesmentDaoImpl;
 import Model.AssesmentModel;
 import View.Assesment;
+import java.util.List;
 import javax.swing.JOptionPane;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -38,10 +39,21 @@ public class AssesmentController {
             String keluhan =  view.getTxtKeluhan().getText();
             String diagnosis =  view.getTxtDiagnosis().getText();
             
+            List<String> imagePaths = view.filePaths;
+            
             model = new AssesmentModel();
             model.setNama(nama); 
             model.setKeluhan(keluhan);
             model.setDiagnosis(diagnosis);
+            
+            model.setGambar_satu(imagePaths.size() > 0 ? imagePaths.get(0) : null);
+            model.setGambar_dua(imagePaths.size() > 1 ? imagePaths.get(1) : null);
+            model.setGambar_tiga(imagePaths.size() > 2 ? imagePaths.get(2) : null);
+            model.setGambar_empat(imagePaths.size() > 3 ? imagePaths.get(3) : null);
+            model.setGambar_lima(imagePaths.size() > 4 ? imagePaths.get(4) : null);
+            model.setGambar_enam(imagePaths.size() > 5 ? imagePaths.get(5) : null);
+            model.setGambar_tujuh(imagePaths.size() > 6 ? imagePaths.get(6) : null);
+            model.setGambar_delapan(imagePaths.size() > 7 ? imagePaths.get(7) : null);
             dao.insert(model);
             JOptionPane.showMessageDialog(view, "Entry data ok");
         } catch (Exception ex) {

@@ -28,6 +28,7 @@ public class Assesment extends javax.swing.JFrame {
     public JLabel lblImage, lblTest2, lblImage1, lblImage2, lblImage3, lblImage4, lblImage5, lblImage6, lblImage7, lblImage8;
     public JTextField txt, inputNama;
     public JTextArea inputKeluhan, inputDiagnosis;
+    public List<String> filePaths = new ArrayList<>();
     
     AssesmentController controller;
     private boolean captureImage = false;
@@ -56,27 +57,13 @@ public class Assesment extends javax.swing.JFrame {
         inputKeluhan = txtKeluhan;
         inputDiagnosis = txtDiagnosis;
         
-
-//        lblTest2 = previewImageTest;
-        txt = txtInput;
-        getImagePaths();
-        
-//        testImage();            
-//        showImage("capture_test.jpeg");  // Tampilkan gambar default atau kosong
-
-        
-        // Menampilkan gambar berdasarkan filePath
-//        System.out.println(filePath);
-//
-//        if (filePath != null && !filePath.isEmpty()) {
-//            System.out.println("ga kosong");
-//            showImage(filePath);  // Menampilkan gambar sesuai dengan filePath
-//        } else {
-//            System.out.println("kosong");
-//            showImage(null);  // Tampilkan gambar default atau kosong
-//        }
-        
     }
+    
+     public void getFilePath(List<String> files) {
+           this.filePaths = files;  // Menyimpan filePaths yang diterima ke variabel global
+           System.out.println("total gambar" + filePaths);
+    }
+
     
     public void updateData(String text, String newData) {
         lblTest2.setText(text);
@@ -121,14 +108,7 @@ public class Assesment extends javax.swing.JFrame {
             showImage(filePath); // Menampilkan gambar di JLabel
         }
     }
-    
-        public void testImage(){
-        File imageFile = new File("D:/Viola Yosevi/Java Projects/Med1_Endoskopi/capture_test.jpeg");
-        ImageIcon imageIcon = new ImageIcon(imageFile.getAbsolutePath());
-//        previewImageTest.setIcon(imageIcon);
-
-    }
-    
+   
     
     // Setter untuk gambar, jika perlu
     public void setImage(String filePath) {
@@ -149,29 +129,6 @@ public class Assesment extends javax.swing.JFrame {
                 break;  // Hentikan setelah menemukan label kosong
             }
         }
-    }
-    
-    
-    
-
-    public List<String> getImagePaths() {
-        List<String> paths = new ArrayList<>();
-
-        JLabel[] labels = {lblImage1, lblImage2, lblImage3, lblImage4, lblImage5, lblImage6, lblImage7, lblImage8};
-
-        for (JLabel label : labels) {
-            if (label.getIcon() != null) {
-                ImageIcon icon = (ImageIcon) label.getIcon();
-                String imagePath = icon.getDescription(); // Ambil path gambar dari ImageIcon
-                if (imagePath != null) {
-                    paths.add(imagePath);
-                }
-            }
-        }
-         // Print out the image paths for debugging
-        System.out.println("Image Paths: " + paths);
-
-        return paths;
     }
 
     
@@ -210,9 +167,6 @@ public class Assesment extends javax.swing.JFrame {
         btnOpenEndoskopi = new javax.swing.JButton();
         btnSavePrint = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        btnTake = new javax.swing.JButton();
-        txtInput = new javax.swing.JTextField();
-        btnOk = new javax.swing.JButton();
         previewImage = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
@@ -277,20 +231,6 @@ public class Assesment extends javax.swing.JFrame {
             }
         });
 
-        btnTake.setText("jButton1");
-        btnTake.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTakeActionPerformed(evt);
-            }
-        });
-
-        btnOk.setText("Ok");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -300,9 +240,7 @@ public class Assesment extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnSavePrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnOpenEndoskopi, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTake, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+                .addGap(110, 110, 110))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -319,12 +257,7 @@ public class Assesment extends javax.swing.JFrame {
                             .addComponent(jScrollPane2)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(151, 151, 151)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(txtInput, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnOk)))
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -345,14 +278,8 @@ public class Assesment extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOpenEndoskopi)
-                    .addComponent(btnTake))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOk))
-                .addGap(18, 18, 18)
+                .addComponent(btnOpenEndoskopi)
+                .addGap(50, 50, 50)
                 .addComponent(btnSavePrint)
                 .addGap(18, 18, 18)
                 .addComponent(btnBack)
@@ -506,6 +433,7 @@ public class Assesment extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOpenEndoskopiActionPerformed
 
     private void btnSavePrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavePrintActionPerformed
+        System.out.println("yeayy" +filePaths);
         controller.insert();
         controller.clearForm();
     }//GEN-LAST:event_btnSavePrintActionPerformed
@@ -514,65 +442,6 @@ public class Assesment extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnTakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTakeActionPerformed
-//        OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
-        
-        try {
-//            grabber.start();
-//            IplImage img = grabber.grab();
-//            if(img != null){
-//                String filePath = "capture_test.jpeg";
-//                cvSaveImage(filePath, img);
-//                
-//                ImageIcon imagePreview = new ImageIcon();
-//                ImageIcon imageIcon = new ImageIcon(new ImageIcon(filePath).getImage().getScaledInstance(
-//                        previewImage.getWidth(),
-//                        previewImage.getHeight(),
-//                      Image.SCALE_SMOOTH // Pastikan gambar sesuai ukuran JLabel// Pastikan gambar sesuai ukuran JLabel
-//                ));
-//
-//                // Set gambar ke JLabel yang sudah ada
-//                previewImage.setIcon(imageIcon);
-//            }
-//            // Berhenti menggunakan grabber
-//            grabber.stop();
-            IplImage img = grabber.grab();
-               if (img != null) {
-                   String filePath = "capture_test.jpeg";
-                   cvSaveImage(filePath, img);
-
-                   ImageIcon imageIcon = new ImageIcon(new ImageIcon(filePath).getImage().getScaledInstance(
-                       previewImage.getWidth(),
-                       previewImage.getHeight(),
-                       Image.SCALE_SMOOTH
-                   ));
-
-                   // Set gambar ke JLabel
-                   previewImage.setIcon(imageIcon);
-               }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_btnTakeActionPerformed
-
-    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        File imageFile = new File("D:/Viola Yosevi/Java Projects/Med1_Endoskopi/capture_test.jpeg");
-        ImageIcon imageIcon = new ImageIcon(imageFile.getAbsolutePath());
-        EndoskopiModal.formInstance.lbl.setIcon(imageIcon);
-    }//GEN-LAST:event_btnOkActionPerformed
-
-//     private JLabel imageLabel;  
-//     private void updateImageDisplay(String imagePath) {
-//        // Membuat ImageIcon dari file gambar
-//        ImageIcon imageIcon = new ImageIcon(imagePath);
-//        
-//        // Mengatur ImageIcon ke JLabel
-//        imageLabel.setIcon(imageIcon);
-//        
-//        // Memperbarui tampilan
-//        revalidate();
-//        repaint();
-//    }
     /**
      * @param args the command line arguments
      */
@@ -610,10 +479,8 @@ public class Assesment extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnOk;
     private javax.swing.JButton btnOpenEndoskopi;
     private javax.swing.JButton btnSavePrint;
-    private javax.swing.JButton btnTake;
     private javax.swing.JLabel imageDelapan;
     private javax.swing.JLabel imageDua;
     private javax.swing.JLabel imageEmpat;
@@ -633,7 +500,6 @@ public class Assesment extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel previewImage;
     private javax.swing.JTextArea txtDiagnosis;
-    private javax.swing.JTextField txtInput;
     private javax.swing.JTextArea txtKeluhan;
     private javax.swing.JTextField txtNama;
     // End of variables declaration//GEN-END:variables
