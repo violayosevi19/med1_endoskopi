@@ -34,6 +34,7 @@ public class LoginController {
             
            
             boolean loginSuccessful = dao.login(model);
+             System.out.println("login" + loginSuccessful + username + password);
             
             if (loginSuccessful) {
                JOptionPane.showMessageDialog(view, "Login Berhasil!");

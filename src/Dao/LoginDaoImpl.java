@@ -4,10 +4,12 @@ package Dao;
 import Config.Koneksi;
 import Model.LoginModel;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.*;
+import java.util.Base64;
 
 public class LoginDaoImpl implements LoginDao{
 
@@ -22,6 +24,8 @@ public class LoginDaoImpl implements LoginDao{
 
         if (rs.next()) {
             String storedPasswordHash = rs.getString("password");
+            
+            System.out.println("masuk" +storedPasswordHash);
             // Verifikasi password
             return checkPassword(login.getPassword(), storedPasswordHash);
         } else {
@@ -37,20 +41,20 @@ public class LoginDaoImpl implements LoginDao{
         // Bandingkan password yang di-hash
         return inputPasswordHash.equals(storedPasswordHash);
     }
+   
     
-    // Fungsi untuk meng-hash password (contoh menggunakan SHA-256)
     private String hashPassword(String password) {
         try {
-            // Menggunakan SHA-256 untuk hashing password
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hash = md.digest(password.getBytes());
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hash) {
-                hexString.append(String.format("%02x", b));
-            }
-            return hexString.toString(); // Mengembalikan hasil hash dalam bentuk string hexadecimal
-        } catch (Exception e) {
-            throw new RuntimeException("Error while hashing password", e);
+            // Membuat objek MessageDigest untuk algoritma SHA-256
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            // Mengubah password menjadi array byte dan melakukan hashing
+            byte[] hashedBytes = digest.digest(password.getBytes());
+
+            // Mengonversi byte array menjadi string base64 (agar mudah disimpan di database)
+            return Base64.getEncoder().encodeToString(hashedBytes);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error hashing password", e);
         }
     }
     

@@ -433,7 +433,6 @@ public class Assesment extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOpenEndoskopiActionPerformed
 
     private void btnSavePrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavePrintActionPerformed
-        System.out.println("yeayy" +filePaths);
         controller.insert();
         controller.clearForm();
     }//GEN-LAST:event_btnSavePrintActionPerformed
