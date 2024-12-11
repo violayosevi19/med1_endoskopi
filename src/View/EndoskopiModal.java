@@ -180,7 +180,7 @@ public class EndoskopiModal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private IplImage capturedStateImage; 
-    Assesment assessmentForm = new Assesment(null);
+    Assesment assessmentForm = new Assesment();
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
@@ -197,13 +197,13 @@ public class EndoskopiModal extends javax.swing.JFrame {
                 imagePaths.add(filePath);
                 
                 // Simpan path file ke database
-                ImagesModel imageModel = new ImagesModel();
-                imageModel.setAssesment_id(1);  // Isi dengan assesment_id yang sesuai
-                imageModel.setImage_path(filePath); // Path file yang sudah disimpan
-                
-                 // Insert image path ke database
-                ImagesDaoImpl imagesDao = new ImagesDaoImpl();
-                imagesDao.insertImages(imageModel);
+//                ImagesModel imageModel = new ImagesModel();
+//                imageModel.setAssesment_id(1);  // Isi dengan assesment_id yang sesuai
+//                imageModel.setImage_path(filePath); // Path file yang sudah disimpan
+//                
+//                 // Insert image path ke database
+//                ImagesDaoImpl imagesDao = new ImagesDaoImpl();
+//                imagesDao.insertImages(imageModel);
                 // Simpan path file ke database
 //                saveImageToDatabase(filePath);
 
@@ -242,7 +242,7 @@ public class EndoskopiModal extends javax.swing.JFrame {
 
                    SwingUtilities.invokeLater(() -> {
                         if (Assesment.Instance == null) {
-                            Assesment.Instance = new Assesment(filePath); // Membuat form baru
+                            Assesment.Instance = new Assesment(); // Membuat form baru
                         }
                         if (Assesment.Instance != null && Assesment.Instance.lblImage != null) {
                             
@@ -300,7 +300,7 @@ public class EndoskopiModal extends javax.swing.JFrame {
                             // Memastikan form terlihat
                             if (!Assesment.Instance.isVisible()) {
                                 Assesment.Instance.setVisible(true);
-                                Assesment.Instance.inputNama.setText(nama);
+                                Assesment.Instance.comboPasien.setSelectedItem(nama);
                                 Assesment.Instance.inputKeluhan.setText(keluhan);
                                 Assesment.Instance.inputDiagnosis.setText(diagnosis);
                                 

@@ -2,31 +2,39 @@
 package View;
 
 import Controller.AssesmentController;
+import Model.LoginModel;
 import com.googlecode.javacv.CanvasFrame;
 import com.googlecode.javacv.OpenCVFrameGrabber;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import com.googlecode.javacv.cpp.opencv_highgui;
 import static com.googlecode.javacv.cpp.opencv_highgui.*;
 import java.awt.Image;
+import java.awt.event.ItemEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 
 public class Assesment extends javax.swing.JFrame {
     
     public static Assesment Instance;
+    public Map<String, Object> currentUser;
     public JLabel lblImage, lblTest2, lblImage1, lblImage2, lblImage3, lblImage4, lblImage5, lblImage6, lblImage7, lblImage8;
     public JTextField txt, inputNama;
+    public JComboBox comboPasien;
     public JTextArea inputKeluhan, inputDiagnosis;
     public List<String> filePaths = new ArrayList<>();
     
@@ -37,9 +45,12 @@ public class Assesment extends javax.swing.JFrame {
 //    CanvasFrame frame = new CanvasFrame("Webcam");
 
  
-    public Assesment(String filePath) {
+    public Assesment(Map<String, Object> user) {
         initComponents();
         controller = new AssesmentController(this);
+        controller.getPasiens();
+        this.currentUser = user;
+        populateUserData();
 //        controller.viewTable();
 //        controller.listNama(); 
 
@@ -53,10 +64,23 @@ public class Assesment extends javax.swing.JFrame {
         lblImage6 = imageEnam;
         lblImage7 = imageTujuh;
         lblImage8 = imageDelapan;
-        inputNama = txtNama;
+//        inputNama = txtNama;
         inputKeluhan = txtKeluhan;
-        inputDiagnosis = txtDiagnosis;
+        inputDiagnosis = txtDiagnosis;  
+        comboPasien = comboBoxNama;
         
+        AutoCompleteDecorator.decorate(comboBoxNama);
+    }
+    
+    public Assesment() {
+        this(null); // Panggil konstruktor lain dengan nilai null
+    }
+    
+    private void populateUserData() {
+        if (currentUser != null) {
+            System.out.println("data user : " + currentUser);
+            // Tambahkan field lainnya jika diperlukan
+        }
     }
     
      public void getFilePath(List<String> files) {
@@ -95,21 +119,24 @@ public class Assesment extends javax.swing.JFrame {
         this.txtKeluhan = txtKeluhan;
     }
 
-    public JTextField getTxtNama() {
-        return txtNama;
+
+    public JComboBox<String> getComboBoxNama() {
+        return comboBoxNama;
     }
 
-    public void setTxtNama(JTextField txtNama) {
-        this.txtNama = txtNama;
+    public void setComboBoxNama(JComboBox<String> comboBoxNama) {
+        this.comboBoxNama = comboBoxNama;
     }
+    
+    
 
     public void setPreviewImage(String filePath) {
         if (filePath != null) {
             showImage(filePath); // Menampilkan gambar di JLabel
         }
     }
-   
     
+   
     // Setter untuk gambar, jika perlu
     public void setImage(String filePath) {
         System.out.println("ini filePath dri endoskopi ya" + filePath);
@@ -157,7 +184,6 @@ public class Assesment extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtNama = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtKeluhan = new javax.swing.JTextArea();
@@ -167,6 +193,7 @@ public class Assesment extends javax.swing.JFrame {
         btnOpenEndoskopi = new javax.swing.JButton();
         btnSavePrint = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        comboBoxNama = new javax.swing.JComboBox<>();
         previewImage = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
@@ -189,12 +216,6 @@ public class Assesment extends javax.swing.JFrame {
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nama");
-
-        txtNama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNamaActionPerformed(evt);
-            }
-        });
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Diagnosis");
@@ -231,6 +252,13 @@ public class Assesment extends javax.swing.JFrame {
             }
         });
 
+        comboBoxNama.setEditable(true);
+        comboBoxNama.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboBoxNamaItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -247,17 +275,17 @@ public class Assesment extends javax.swing.JFrame {
                         .addGap(112, 112, 112)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2)
+                            .addComponent(comboBoxNama, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNama)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -268,8 +296,8 @@ public class Assesment extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addComponent(comboBoxNama, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -375,12 +403,9 @@ public class Assesment extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNamaActionPerformed
-
     private void btnOpenEndoskopiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenEndoskopiActionPerformed
-        String nama = txtNama.getText();
+//        String nama = txtNama.getText();
+        String nama = (String) comboBoxNama.getSelectedItem(); 
         String keluhan = txtKeluhan.getText();
         String diagnosis = txtDiagnosis.getText();
         
@@ -441,6 +466,45 @@ public class Assesment extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void comboBoxNamaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxNamaItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            String selectedItem = (String) evt.getItem();
+            // Proses item yang dipilih
+            System.out.println("Item yang dipilih: " + selectedItem);
+
+        }
+//        comboBoxNama.insertItemAt(item, 0);
+    }//GEN-LAST:event_comboBoxNamaItemStateChanged
+
+
+
+    private void filterComboBoxItems(JComboBox<String> comboBox, String input) {
+    // Ambil semua item dari JComboBox
+        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) comboBox.getModel();
+
+        // Simpan item yang sesuai dengan pencarian
+        List<String> filteredItems = new ArrayList<>();
+
+        // Filter item berdasarkan input yang diketik
+        for (int i = 0; i < model.getSize(); i++) {
+            String item = model.getElementAt(i);
+            if (item.toLowerCase().contains(input.toLowerCase())) {
+                filteredItems.add(item);
+            }
+        }
+
+        // Perbarui JComboBox dengan item yang difilter
+        model.removeAllElements();
+        for (String item : filteredItems) {
+            model.addElement(item);
+        }
+
+        // Pilih item pertama (jika ada) sebagai default
+        if (!filteredItems.isEmpty()) {
+            comboBox.setSelectedIndex(0);
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -471,7 +535,8 @@ public class Assesment extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Assesment(null).setVisible(true);
+                new Assesment().setVisible(true);
+                
             }
         });
     }
@@ -480,6 +545,7 @@ public class Assesment extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnOpenEndoskopi;
     private javax.swing.JButton btnSavePrint;
+    private javax.swing.JComboBox<String> comboBoxNama;
     private javax.swing.JLabel imageDelapan;
     private javax.swing.JLabel imageDua;
     private javax.swing.JLabel imageEmpat;
@@ -500,6 +566,5 @@ public class Assesment extends javax.swing.JFrame {
     private javax.swing.JLabel previewImage;
     private javax.swing.JTextArea txtDiagnosis;
     private javax.swing.JTextArea txtKeluhan;
-    private javax.swing.JTextField txtNama;
     // End of variables declaration//GEN-END:variables
 }

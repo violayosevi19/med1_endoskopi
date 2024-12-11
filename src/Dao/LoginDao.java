@@ -2,8 +2,9 @@
 package Dao;
 
 import Model.LoginModel;
+import java.util.Map;
 
 
 public interface LoginDao {
-    public boolean login(LoginModel login) throws Exception;
+    public Map<String, Object> login(LoginModel login) throws Exception;
 }

@@ -11,12 +11,14 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 
 
 public class LoginController {
     Login view;
     LoginDao dao;
     LoginModel model;
+    private static LoginModel currentUser;
     
     public LoginController(Login view){
         this.view = view;
@@ -33,14 +35,16 @@ public class LoginController {
             model.setPassword(password);
             
            
-            boolean loginSuccessful = dao.login(model);
-             System.out.println("login" + loginSuccessful + username + password);
+            // Panggil DAO untuk login
+//            LoginModel loggedInUser = dao.login(model);
+            Map<String, Object> dataUser = dao.login(model);
             
-            if (loginSuccessful) {
+            if (dataUser != null) {
+//               currentUser = dataUser;
                JOptionPane.showMessageDialog(view, "Login Berhasil!");
 
-               // Beralih ke form berikutnya (misalnya dashboard)
-               Assesment assesment = new Assesment(null); // Ganti dengan view Anda
+               // Beralaih ke form berikutnya (misalnya dashboard)
+               Assesment assesment = new Assesment(dataUser); // Ganti dengan view Anda
                assesment.setVisible(true);
                view.dispose(); // Menutup form login
             } else {
@@ -49,6 +53,10 @@ public class LoginController {
         } catch (Exception ex) {
             Logger.getLogger(AssesmentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public static LoginModel getCurrentUser() {
+        return currentUser; // Mengakses data user yang login
     }
     
     

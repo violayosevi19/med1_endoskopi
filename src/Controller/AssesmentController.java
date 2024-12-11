@@ -28,23 +28,27 @@ public class AssesmentController {
     }
     
     public void clearForm() {
-        view.getTxtNama().setText("");
+        view.getComboBoxNama().setSelectedItem(null);
         view.getTxtKeluhan().setText("");
         view.getTxtDiagnosis().setText("");
     }
     
      public void insert() {
         try {
-            String nama = view.getTxtNama().getText();
+            String nama = (String) view.getComboBoxNama().getSelectedItem();
             String keluhan =  view.getTxtKeluhan().getText();
             String diagnosis =  view.getTxtDiagnosis().getText();
             
             List<String> imagePaths = view.filePaths;
+            Object data = view.currentUser.get("id");
+            int userId = (int) data; 
             
             model = new AssesmentModel();
             model.setNama(nama); 
             model.setKeluhan(keluhan);
             model.setDiagnosis(diagnosis);
+            model.setId_user(userId);
+
             
             model.setGambar_satu(imagePaths.size() > 0 ? imagePaths.get(0) : null);
             model.setGambar_dua(imagePaths.size() > 1 ? imagePaths.get(1) : null);
@@ -60,6 +64,21 @@ public class AssesmentController {
             Logger.getLogger(AssesmentController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+     
+      public void getPasiens() {
+        try {
+            // Ambil daftar nama dari database
+            List<String> pasiens = dao.getPasien();
+
+            // Isi data ke JComboBox
+            for (String nama : pasiens) {
+                view.getComboBoxNama().addItem(nama); // Menambahkan item ke JComboBox
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
      
     

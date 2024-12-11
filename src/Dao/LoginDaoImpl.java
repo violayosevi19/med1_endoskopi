@@ -10,11 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.*;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginDaoImpl implements LoginDao{
 
     @Override
-    public boolean login(LoginModel login) throws Exception {
+    public Map<String, Object> login(LoginModel login) throws Exception {
         Koneksi koneksi = new Koneksi();
         Connection conn = koneksi.getConnection();
         String sql = "SELECT * FROM users WHERE username = ?";
@@ -24,13 +26,28 @@ public class LoginDaoImpl implements LoginDao{
 
         if (rs.next()) {
             String storedPasswordHash = rs.getString("password");
-            
-            System.out.println("masuk" +storedPasswordHash);
+        
             // Verifikasi password
-            return checkPassword(login.getPassword(), storedPasswordHash);
-        } else {
-            return false; // Username tidak ditemukan
+//            return checkPassword(login.getPassword(), storedPasswordHash);
+// Verifikasi password
+        if (checkPassword(login.getPassword(), storedPasswordHash)) {
+            // Buat objek LoginModel dan isi dengan data pengguna
+//            LoginModel user = new LoginModel();
+            Map<String, Object> dataUser = new HashMap<>();
+//            user.setId(rs.getInt("id")); // Ambil kolom "id"
+//            user.setUsername(rs.getString("username")); // Ambil kolom "username"
+//            user.setFullName(rs.getString("full_name")); // Ambil kolom "full_name"
+            dataUser.put("id", rs.getInt("id")); // Ambil kolom "id"
+            dataUser.put("username", rs.getString("username")); // Ambil kolom "username"
+            dataUser.put("fullName", rs.getString("full_name")); // Ambil kolom "full_name"
+            // Tambahkan kolom lain sesuai kebutuhan
+
+            return dataUser; // Kembalikan objek LoginModel
         }
+        } else {
+            return null; // Username tidak ditemukan
+        }
+         return null; // Login gagal
     }
     
       // Fungsi untuk memverifikasi password yang diinputkan dengan yang ada di database
