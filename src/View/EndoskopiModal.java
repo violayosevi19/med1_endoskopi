@@ -67,6 +67,9 @@ public class EndoskopiModal extends javax.swing.JFrame {
     public void CameraViewer(){
         try {
 
+             frame.setCanvasSize(1200, 1000);
+             frame.pack();
+             frame.setLocationRelativeTo(null);
             // Menjalankan kamera dalam thread terpisah
              new Thread(() -> {
                 try {

@@ -39,7 +39,7 @@ public class AssesmentController {
             String keluhan =  view.getTxtKeluhan().getText();
             String diagnosis =  view.getTxtDiagnosis().getText();
             
-            List<String> imagePaths = view.filePaths;
+            List<String> imagePaths = view.imagePaths;
             Object data = view.currentUser.get("id");
             int userId = (int) data; 
             
