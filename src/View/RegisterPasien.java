@@ -6,6 +6,7 @@ package View;
 
 import Controller.RegisterPasienController;
 import com.toedter.calendar.JDateChooser;
+import java.util.Map;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
@@ -16,10 +17,16 @@ import javax.swing.JTextField;
 public class RegisterPasien extends javax.swing.JFrame {
 
     RegisterPasienController controller;
+    public Map<String, Object> currentUser;
    
-    public RegisterPasien() {
+    public RegisterPasien(Map<String, Object> user) {
         initComponents();
         controller = new RegisterPasienController(this);
+        this.currentUser = user;
+    }
+    
+    public RegisterPasien() {
+        this(null);
     }
 
     public JRadioButton getRbtnPria() {

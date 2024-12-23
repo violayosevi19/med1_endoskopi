@@ -4,6 +4,7 @@
  */
 package med1_endoskopi;
 
+import Config.Koneksi;
 import View.Login;
 
 
@@ -18,11 +19,12 @@ public class Med1_Endoskopi {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         Login loginFrame = new Login();
         loginFrame.setVisible(true);
         loginFrame.pack();
         loginFrame.setLocationRelativeTo(null);
     }
+        
+        
     
 }

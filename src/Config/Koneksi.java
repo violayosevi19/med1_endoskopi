@@ -27,6 +27,17 @@ public class Koneksi {
     public static Connection getConnection(){
         if(conn == null){
             try {
+//                String jdbcUrl = "jdbc:sqlite:D:\\Viola Yosevi\\Application\\SQLite\\sqlite\\db_endoskopi.db";
+//                conn = (Connection) DriverManager.getConnection(jdbcUrl);
+//                String sql = "SELECT * FROM pasiens";
+//                Statement st = conn.createStatement();
+//                
+//                ResultSet rs = st.executeQuery(sql);
+//                while(rs.next()){
+//                    String name = rs.getString("nama");
+//                    
+//                    System.out.println("this is data " +  name);
+//                }
                 String url = "jdbc:mysql://localhost:3307/db_endoskopi";
                 String user = "root";
                 String pass = "";

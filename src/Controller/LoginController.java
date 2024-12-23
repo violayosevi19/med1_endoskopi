@@ -6,6 +6,7 @@ import Dao.LoginDaoImpl;
 import Model.LoginModel;
 import View.Assesment;
 import View.Login;
+import View.MenuEndoskopi;
 import javax.swing.JOptionPane;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -43,9 +44,10 @@ public class LoginController {
 //               currentUser = dataUser;
                JOptionPane.showMessageDialog(view, "Login Berhasil!");
 
-               // Beralaih ke form berikutnya (misalnya dashboard)
-               Assesment assesment = new Assesment(dataUser); // Ganti dengan view Anda
-               assesment.setVisible(true);
+               MenuEndoskopi menuEndoskopi = new MenuEndoskopi(dataUser);
+               menuEndoskopi.setVisible(true);
+               menuEndoskopi.pack();
+               menuEndoskopi.setLocationRelativeTo(null);
                view.dispose(); // Menutup form login
             } else {
                 JOptionPane.showMessageDialog(view, "Username atau Password salah!");

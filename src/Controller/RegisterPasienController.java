@@ -4,8 +4,10 @@ package Controller;
 import Dao.RegisterPasienDao;
 import Dao.RegisterPasienDaoImpl;
 import Model.RegisterPasienModel;
+import View.Assesment;
 import View.RegisterPasien;
 import java.text.SimpleDateFormat;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -43,8 +45,19 @@ public class RegisterPasienController {
             model.setTgl_lahir(tgl_lahir);
             model.setJenis_kelamin(jenis_kelamin);
             
+            Map<String, Object> userLogin = view.currentUser;
+            
             dao.insert(model);
             JOptionPane.showMessageDialog(view, "Registrasi Pasien Berhasil!");
+            
+            // Menutup form registrasi
+            view.dispose();
+
+            // Membuka form Assesment dengan data pasien
+            Assesment assesmentForm = new Assesment(userLogin);
+            assesmentForm.setVisible(true);
+            assesmentForm.pack();
+            assesmentForm.setLocationRelativeTo(null);
             
         } catch (Exception e) {
             Logger.getLogger(AssesmentController.class.getName()).log(Level.SEVERE, null, e);
