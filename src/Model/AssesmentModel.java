@@ -17,6 +17,7 @@ public class AssesmentModel {
     private String gambar_enam;
     private String gambar_tujuh;
     private String gambar_delapan;
+    private String gambar_sembilan;
     private int id_user;
 
 
@@ -114,6 +115,14 @@ public class AssesmentModel {
 
     public void setGambar_delapan(String gambar_delapan) {
         this.gambar_delapan = gambar_delapan;
+    }
+    
+    public String getGambar_sembilan() {
+        return gambar_sembilan;
+    }
+
+    public void setGambar_sembilan(String gambar_delapan) {
+        this.gambar_sembilan = gambar_sembilan;
     }
 
     public int getId_user() {

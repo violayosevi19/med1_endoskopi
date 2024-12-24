@@ -52,7 +52,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="66" red="66" type="rgb"/>
+          <Color blue="33" green="0" red="ff" type="rgb"/>
         </Property>
       </Properties>
 
@@ -135,6 +135,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
@@ -241,21 +244,13 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="imageSatu" min="-2" pref="237" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="imageEmpat" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
-                                  <Component id="imageTujuh" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="12" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="imageEmpat" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
+                          <Component id="imageTujuh" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                          <Component id="imageSatu" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="imageLima" min="-2" pref="237" max="-2" attributes="0"/>
@@ -285,16 +280,15 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="imageEmpat" min="-2" pref="180" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="imageTujuh" min="-2" pref="180" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="imageLima" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
-                                  <Component id="imageEnam" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
-                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="imageDelapan" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="imageDelapan" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="imageTujuh" pref="186" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="imageLima" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="imageEnam" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="336" max="32767" attributes="0"/>

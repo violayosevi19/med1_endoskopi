@@ -22,7 +22,7 @@ public class AssesmentDaoImpl implements AssesmentDao{
     public void insert(AssesmentModel assesment) throws Exception {
         Koneksi koneksi = new Koneksi();
         Connection conn = koneksi.getConnection();
-        String sql = "INSERT INTO assesment(nama,keluhan,diagnosis,gambar_satu,gambar_dua,gambar_tiga,gambar_empat,gambar_lima,gambar_enam,gambar_tujuh,gambar_delapan,id_user) "
+        String sql = "INSERT INTO assesments(nama,keluhan,diagnosis,gambar_satu,gambar_dua,gambar_tiga,gambar_empat,gambar_lima,gambar_enam,gambar_tujuh,gambar_delapan,id_user) "
                 + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, assesment.getNama());

@@ -23,6 +23,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -47,7 +48,8 @@ public class Assesment extends javax.swing.JFrame {
     private boolean captureImage = false;
     CvCapture capture;
     OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
-    CanvasFrame frame = new CanvasFrame("Webcam");
+//    OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(1);
+    
 
  
     public Assesment(Map<String, Object> user) {
@@ -198,113 +200,137 @@ public class Assesment extends javax.swing.JFrame {
  
     @SuppressWarnings("unchecked")
     
-     public void CameraViewer(){
-        try {
+    public void CameraViewer() {
+    try {
+        CanvasFrame frame = new CanvasFrame("Webcam");
+        frame.setCanvasSize(1200, 800);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
 
-             frame.setCanvasSize(1200, 800);
-             frame.pack();
-             frame.setLocationRelativeTo(null);
-            // Menjalankan kamera dalam thread terpisah
-             new Thread(() -> {
-                try {
-                    grabber.start(); // Mulai grabber kamera
-                    
-                    // Tambahkan KeyListener ke frame
-                   
-                    frame.addKeyListener(new KeyAdapter() {
-                        @Override
-                        public void keyPressed(KeyEvent e) {
-                            System.out.println(e.getKeyCode());
-                            System.out.println("Kamu tekan tombol: " + e.getKeyText(e.getKeyCode())); // Menampilkan nama tombol yang ditekan
-                            if (e.getKeyCode() == KeyEvent.VK_1) {
-                                System.out.println("masuk yaaa");
-                                takePicture();
-                            }
-                        }
-                    });
-                    
-                      // Pastikan CanvasFrame dapat menerima input
-                    frame.setFocusable(true);
-                    frame.requestFocusInWindow();
+        // Thread untuk menangkap gambar dari kamera
+        new Thread(() -> {
+            try {
+                grabber.start();
 
-                   
-                    while (frame.isVisible()) {
-                        IplImage grabbedImage = grabber.grab(); // Ambil frame
-                        if (grabbedImage != null) {
-                            frame.showImage(grabbedImage); // Tampilkan frame ke CanvasFrame
+                // Tambahkan KeyListener untuk menangkap input keyboard
+                frame.addKeyListener(new KeyAdapter() {
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                        System.out.println(e.getKeyCode());
+                        System.out.println("Kamu tekan tombol: " + e.getKeyText(e.getKeyCode()));
+                        if (e.getKeyCode() == KeyEvent.VK_1) {
+                            System.out.println("masuk yaaa");
+                            takePicture();
                         }
                     }
-                    grabber.stop(); // Hentikan grabber saat frame ditutup
-                } catch (Exception e) {
-                    e.printStackTrace();
+                });
+
+                frame.setFocusable(true);
+                frame.requestFocusInWindow();
+
+                // Loop untuk menampilkan gambar
+                while (frame.isVisible()) {
+                    IplImage grabbedImage = grabber.grab();
+                    if (grabbedImage != null) {
+                        frame.showImage(grabbedImage);
+                    }
                 }
-            }).start();
 
+                // Hentikan grabber jika jendela ditutup
+                grabber.stop();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
 
-            // Menutup aplikasi saat jendela ditutup
-            frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        // Ubah perilaku penutupan jendela
+        frame.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // Tambahkan listener untuk menangani event penutupan jendela
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                System.out.println("Jendela ditutup. Grabber dihentikan.");
+                try {
+                    grabber.stop();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
-     
-    private IplImage capturedStateImage;
-    public void takePicture(){
-        System.out.println("Kamu berhasil take");
-         try {
-            IplImage img = grabber.grab();
-               if (img != null) {
-                   capturedStateImage = img;
-                   String folderPath = "images/";
-                    File folder = new File(folderPath);
-                    if (!folder.exists()) {
-                        folder.mkdirs(); // Buat folder jika belum ada
-                    }
-                    String fileName = "capture_" + System.currentTimeMillis() + ".jpeg";
-                    String filePath = folderPath + fileName;
-                    cvSaveImage(filePath, capturedStateImage);  // Menyimpan gambar ke file
-                     imagePaths.add(filePath);
-                   BufferedImage bufferedImage = convertToBufferedImage(img);
-                   
-                   JLabel[] labels = {
-                        imageSatu, imageDua, imageTiga, imageEmpat, imageLima, imageEnam, imageTujuh, imageDelapan
-                    };
-                   
-                   // Memastikan gambar muncul di label sesuai urutan yang benar
-                    for (JLabel label : labels) {
-                            if (label.getIcon() == null) {
-                                    ImageIcon imageIcon = new ImageIcon(bufferedImage.getScaledInstance(
-                                            label.getWidth(),
-                                            label.getHeight(),
-                                            Image.SCALE_SMOOTH
-                                    ));
-                                    label.setIcon(imageIcon);
-                                    label.setVisible(true);
-                                    break; // Hentikan setelah menemukan label kosong
-                            }
-                    }
+}
 
-               }
-        } catch (Exception e) {
-            e.printStackTrace();
+    private IplImage capturedStateImage;
+private int pictureCount = 0; // Variabel untuk menghitung jumlah gambar yang diambil
+
+public void takePicture() {
+    System.out.println("Kamu berhasil take");
+    try {
+        IplImage img = grabber.grab();
+        if (img != null) {
+            capturedStateImage = img;
+            String folderPath = "images/";
+            File folder = new File(folderPath);
+            if (!folder.exists()) {
+                folder.mkdirs(); // Buat folder jika belum ada
+            }
+            String fileName = "capture_" + System.currentTimeMillis() + ".jpeg";
+            String filePath = folderPath + fileName;
+            cvSaveImage(filePath, capturedStateImage); // Menyimpan gambar ke file
+            imagePaths.add(filePath);
+            BufferedImage bufferedImage = convertToBufferedImage(img);
+
+            JLabel[] labels = {
+                imageSatu, imageDua, imageTiga, imageEmpat, imageLima, imageEnam, imageTujuh, imageDelapan
+            };
+
+            for (JLabel label : labels) {
+                if (label.getIcon() == null) {
+                    ImageIcon imageIcon = new ImageIcon(bufferedImage.getScaledInstance(
+                        label.getWidth(),
+                        label.getHeight(),
+                        Image.SCALE_SMOOTH
+                    ));
+                    label.setIcon(imageIcon);
+                    label.setVisible(true);
+                    break;
+                }
+            }
+
+            // Menambahkan jumlah pengambilan gambar
+            pictureCount++;
+            String message = "Success Take Picture ke-" + pictureCount;
+
+            // Menampilkan notifikasi otomatis tutup dalam 3 detik
+            JDialog dialog = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE).createDialog("Notifikasi");
+            dialog.setModal(false); // Non-modal agar tidak mengganggu aktivitas lainnya
+            dialog.setVisible(true);
+
+            // Timer untuk menutup dialog setelah 3 detik
+            new javax.swing.Timer(3000, e -> dialog.dispose()).start();
         }
-     }
-    
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
     
      private BufferedImage convertToBufferedImage(IplImage iplImage) {
-        // Mendapatkan lebar dan tinggi gambar
+
         int width = iplImage.width();
         int height = iplImage.height();
 
-        // Membaca channel (warna) dari IplImage ke dalam array byte
+
         byte[] data = new byte[width * height * 3];
         iplImage.getByteBuffer().get(data);
 
-        // Membuat BufferedImage dengan tipe RGB
+
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
 
-        // Menyalin data byte ke dalam BufferedImage
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 int blue = data[(y * width + x) * 3] & 0xFF;
@@ -351,12 +377,13 @@ public class Assesment extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 0, 51));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ASSESMENT");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nama");
 
@@ -480,17 +507,12 @@ public class Assesment extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(imageSatu, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(imageEmpat, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(imageTujuh, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)))
+                    .addComponent(imageEmpat, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imageTujuh, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imageSatu, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(imageLima, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -514,14 +536,13 @@ public class Assesment extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(imageEmpat, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(imageTujuh, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(imageLima, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(imageEnam, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(imageDelapan, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(imageDelapan, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(imageTujuh, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(imageLima, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(imageEnam, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(336, Short.MAX_VALUE))
         );
 
@@ -615,7 +636,11 @@ public class Assesment extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSavePrintActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        MenuEndoskopi login = new MenuEndoskopi();
+        login.setVisible(true);
+        login.pack();
+        login.setLocationRelativeTo(null);
+        this.dispose();
 //        System.out.println("ini data image " +imagePaths);
     }//GEN-LAST:event_btnBackActionPerformed
 

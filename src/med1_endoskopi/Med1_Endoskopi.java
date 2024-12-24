@@ -19,6 +19,9 @@ public class Med1_Endoskopi {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+//      if(){
+//          
+//      }
         Login loginFrame = new Login();
         loginFrame.setVisible(true);
         loginFrame.pack();
