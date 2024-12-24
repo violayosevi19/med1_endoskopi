@@ -26,8 +26,8 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane3" min="-2" pref="495" max="-2" attributes="0"/>
-              <EmptySpace pref="115" max="32767" attributes="0"/>
+              <Component id="jScrollPane3" min="-2" pref="779" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="previewImage" min="-2" pref="144" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
           </Group>
@@ -38,7 +38,7 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
               <Component id="previewImage" min="-2" pref="119" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="462" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
@@ -116,7 +116,7 @@
                   <Component id="btnSavePrint" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="63" max="32767" attributes="0"/>
+                  <EmptySpace pref="91" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -241,25 +241,34 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="imageLima" min="-2" pref="237" max="-2" attributes="0"/>
-                                  <Component id="imageTiga" min="-2" pref="237" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="imageSatu" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="imageSatu" min="-2" pref="237" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Component id="imageTujuh" min="-2" pref="240" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="imageEmpat" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
+                                  <Component id="imageTujuh" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="12" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="imageLima" min="-2" pref="237" max="-2" attributes="0"/>
+                              <Component id="imageDua" min="-2" pref="237" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="imageDelapan" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="imageDua" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
-                          <Component id="imageDelapan" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
-                          <Component id="imageEnam" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
-                          <Component id="imageEmpat" alignment="0" min="-2" pref="237" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="imageTiga" min="-2" pref="237" max="-2" attributes="0"/>
+                          <Component id="imageEnam" min="-2" pref="237" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="300" max="32767" attributes="0"/>
+                      <EmptySpace pref="51" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -270,26 +279,25 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="imageDua" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
                           <Component id="imageSatu" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="imageEmpat" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
                           <Component id="imageTiga" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="imageEnam" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
-                          <Component id="imageLima" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
-                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="imageDelapan" min="-2" pref="180" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="imageTujuh" pref="180" max="32767" attributes="0"/>
-                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="imageEmpat" min="-2" pref="180" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="imageTujuh" min="-2" pref="180" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="imageLima" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="imageEnam" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="imageDelapan" min="-2" pref="180" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="138" max="32767" attributes="0"/>
+                      <EmptySpace pref="336" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
