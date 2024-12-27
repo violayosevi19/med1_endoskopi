@@ -19,6 +19,8 @@ public class AssesmentModel {
     private String gambar_delapan;
     private String gambar_sembilan;
     private int id_user;
+    private int id_pasien;
+
 
 
     public String getNama() {
@@ -132,6 +134,16 @@ public class AssesmentModel {
     public void setId_user(int id_user) {
         this.id_user = id_user;
     }
+
+    public int getId_pasien() {
+        return id_pasien;
+    }
+
+    public void setId_pasien(int id_pasien) {
+        this.id_pasien = id_pasien;
+    }
+    
+    
     
     
     

@@ -1,6 +1,7 @@
 
 package View;
 
+import Config.Koneksi;
 import Controller.AssesmentController;
 import Model.LoginModel;
 import com.googlecode.javacv.CanvasFrame;
@@ -16,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.imageio.ImageIO;
@@ -29,7 +31,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import java.sql.*;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
 
 
 public class Assesment extends javax.swing.JFrame {
@@ -51,9 +58,11 @@ public class Assesment extends javax.swing.JFrame {
 //    OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(1);
     
 
+    private Connection conn;
  
     public Assesment(Map<String, Object> user) {
         initComponents();
+        conn = Koneksi.getConnection();
         controller = new AssesmentController(this);
         controller.getPasiens();
         this.currentUser = user;
@@ -263,8 +272,10 @@ public class Assesment extends javax.swing.JFrame {
         e.printStackTrace();
     }
 }
+    
+   
 
-    private IplImage capturedStateImage;
+private IplImage capturedStateImage;
 private int pictureCount = 0; // Variabel untuk menghitung jumlah gambar yang diambil
 
 public void takePicture() {
@@ -438,7 +449,7 @@ public void takePicture() {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnSavePrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnOpenEndoskopi, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
-                .addGap(110, 110, 110))
+                .addGap(107, 107, 107))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -633,6 +644,7 @@ public void takePicture() {
     private void btnSavePrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavePrintActionPerformed
         controller.insert();
         controller.clearForm();
+        controller.printFile();
     }//GEN-LAST:event_btnSavePrintActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -647,6 +659,7 @@ public void takePicture() {
     private void comboBoxNamaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxNamaItemStateChanged
         if(evt.getStateChange() == ItemEvent.SELECTED){
             String selectedItem = (String) evt.getItem();
+            System.out.println("kamu milih " +selectedItem);
 
         }
 //        comboBoxNama.insertItemAt(item, 0);
