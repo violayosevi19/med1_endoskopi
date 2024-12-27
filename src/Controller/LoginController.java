@@ -42,8 +42,11 @@ public class LoginController {
             
             if (dataUser != null) {
 //               currentUser = dataUser;
+                 if(dataUser.get("role")=="operator")
+                 {
+                     JOptionPane.showMessageDialog(view, "Login Berhasil!");
+                 }
                JOptionPane.showMessageDialog(view, "Login Berhasil!");
-
                MenuEndoskopi menuEndoskopi = new MenuEndoskopi(dataUser);
                menuEndoskopi.setVisible(true);
                menuEndoskopi.pack();

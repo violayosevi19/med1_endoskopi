@@ -123,7 +123,7 @@ public class AssesmentModel {
         return gambar_sembilan;
     }
 
-    public void setGambar_sembilan(String gambar_delapan) {
+    public void setGambar_sembilan(String gambar_sembilan) {
         this.gambar_sembilan = gambar_sembilan;
     }
 
