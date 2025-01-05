@@ -36,11 +36,12 @@ public class SettingController {
             model.setTombol(tombol);
             model.setAlamat(address);
             
-           
-            dao.insert(model);
-            JOptionPane.showMessageDialog(view, "Setting Berhasil!");
+           JOptionPane.showMessageDialog(view, "Setting Berhasil!");
+           dao.insert(model);
+            
             
         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(view, ex);
             Logger.getLogger(AssesmentController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
