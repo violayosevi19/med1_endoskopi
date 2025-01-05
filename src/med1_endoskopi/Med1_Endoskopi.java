@@ -33,9 +33,11 @@ public class Med1_Endoskopi {
          try {
             File file = new File("data.txt");
             boolean openEncrypt = false;
-            String fileUUID = null; // UUID yang dibaca dari file
-            String fileUUID2 = null; // UUID kedua dari file
+            String fileUUID2 = null; // UUID yang dibaca dari file
+            String fileUUID = null;
+            
             String generatedUUID = getUniqueCode(); // UUID baru yang dihasilkan
+            String UUID = generatedUUID; // UUID kedua dari file
 
             // Membaca file jika ada
             if (file.exists()) {
@@ -56,15 +58,6 @@ public class Med1_Endoskopi {
                     }
                 }
             } else {
-                // Membuat file baru jika tidak ditemukan
-                System.out.println("File data.txt tidak ditemukan. Membuat file baru dengan nilai default.");
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                    writer.write("true"); // Menulis nilai default ke file
-                    writer.newLine();
-                    writer.write("Unique Code: " + generatedUUID);
-                    writer.newLine();
-                    writer.write("equal Code: ");
-                }
                 System.out.println("Kode unik PC: " + generatedUUID + " ditulis ke file.");
             }
 

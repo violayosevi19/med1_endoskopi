@@ -4,6 +4,22 @@
  */
 package View;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.NetworkInterface;
+import java.net.URL;
+import java.nio.ByteBuffer;
+import java.util.Enumeration;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTextField;
+import static med1_endoskopi.Med1_Endoskopi.getUniqueCode;
+
 /**
  *
  * @author HP
@@ -17,6 +33,71 @@ public class Encrypt extends javax.swing.JFrame {
         initComponents();
     }
 
+    public JTextField getTxtEncrypt() {
+        return txtEncrypt;
+    }
+    
+    private static void postUUIDToAPI(String uuid) {
+        try {
+            String apiUrl = "https://your-api-url.com/endpoint"; // Ganti dengan URL API Anda
+            URL url = new URL(apiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+
+            // Data JSON yang dikirim
+            String jsonPayload = "{ \"uuid\": \"" + uuid + "\" }";
+
+            // Kirim data
+            try (OutputStream os = connection.getOutputStream()) {
+                os.write(jsonPayload.getBytes());
+                os.flush();
+            }
+
+            // Periksa respon
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
+                System.out.println("UUID berhasil dikirim ke API.");
+            } else {
+                System.out.println("Gagal mengirim UUID ke API. Response code: " + responseCode);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error saat mengirim UUID ke API.");
+        }
+    }
+    public static String getUniqueCode() throws Exception {
+        Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+        while (networkInterfaces.hasMoreElements()) {
+            NetworkInterface network = networkInterfaces.nextElement();
+            if (network != null && !network.isLoopback() && network.getHardwareAddress() != null) {
+                byte[] mac = network.getHardwareAddress(); // 6 byte MAC Address
+                if (mac.length >= 6) {
+                    ByteBuffer buffer = ByteBuffer.allocate(16);
+
+                    // Isi 6 byte MAC Address ke buffer
+                    buffer.put(mac);
+
+                    // Isi sisa buffer dengan nol
+                    for (int i = 0; i < 10; i++) {
+                        buffer.put((byte) 0);
+                    }
+
+                    // Buat UUID dari buffer
+                    buffer.flip();
+                    long mostSigBits = buffer.getLong();
+                    long leastSigBits = buffer.getLong();
+                    UUID uuid = new UUID(mostSigBits, leastSigBits);
+
+                    return uuid.toString(); // Kembalikan UUID sebagai string
+                }
+            }
+        }
+        throw new RuntimeException("Tidak dapat menemukan MAC Address!");
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,7 +108,7 @@ public class Encrypt extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtEncrypt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -40,6 +121,11 @@ public class Encrypt extends javax.swing.JFrame {
         jLabel1.setText("KODE PENDAFTARAN");
 
         jButton2.setText("SUBMIT");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         jLabel2.setText("PASTIKAN TERHUBUNG INTERNET");
@@ -57,7 +143,7 @@ public class Encrypt extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtEncrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(160, 160, 160))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -71,7 +157,7 @@ public class Encrypt extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(56, 56, 56)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtEncrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(109, Short.MAX_VALUE))
@@ -90,6 +176,30 @@ public class Encrypt extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+//        String generatedUUID = getUniqueCode();
+        String generatedUUID = null;
+        try {
+            generatedUUID = getUniqueCode();
+        } catch (Exception ex) {
+            Logger.getLogger(Encrypt.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        postUUIDToAPI(txtEncrypt.getText());
+         File file = new File("data.txt");
+        System.out.println("File data.txt tidak ditemukan. Membuat file baru dengan nilai default.");
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                    writer.write("true"); // Menulis nilai default ke file
+                    writer.newLine();
+                    writer.write("Unique Code: " + txtEncrypt.getText());
+                    writer.newLine();
+                    writer.write("equal Code: ");
+                    System.out.println("Kode unik PC: " + txtEncrypt.getText() + " ditulis ke file.");
+                } catch (IOException ex) {
+            Logger.getLogger(Encrypt.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,6 +241,6 @@ public class Encrypt extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtEncrypt;
     // End of variables declaration//GEN-END:variables
 }
