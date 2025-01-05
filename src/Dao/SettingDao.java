@@ -12,4 +12,5 @@ import Model.SettingModel;
  */
 public interface SettingDao {
     public void insert(SettingModel settingModel) throws Exception;
+    public void ClearAll() throws Exception;
 }

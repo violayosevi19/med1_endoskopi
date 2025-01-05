@@ -99,7 +99,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         jPanel1.add(Right);
-        Right.setBounds(0, 0, 400, 500);
+        Right.setBounds(0, 0, 400, 501);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel1.setText("LOGIN");
@@ -124,8 +124,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btnLogin.setBackground(new java.awt.Color(102, 102, 255));
-        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogin.setBackground(new java.awt.Color(51, 51, 255));
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -42,17 +42,17 @@ public class Med1_Endoskopi {
             }
 
             // Kondisi berdasarkan isi file
-            if (!openEncrypt) {
-                Encrypt enc = new Encrypt();
-                enc.setVisible(true);
-                enc.pack();
-                enc.setLocationRelativeTo(null);
-            } else {
+//            if (!openEncrypt) {
+//                Encrypt enc = new Encrypt();
+//                enc.setVisible(true);
+//                enc.pack();
+//                enc.setLocationRelativeTo(null);
+//            } else {
                 Login loginFrame = new Login();
                 loginFrame.setVisible(true);
                 loginFrame.pack();
                 loginFrame.setLocationRelativeTo(null);
-            }
+//            }
         } catch (IOException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error membaca file!", "Error", JOptionPane.ERROR_MESSAGE);

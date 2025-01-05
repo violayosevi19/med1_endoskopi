@@ -374,7 +374,6 @@ public void takePicture() {
         btnSavePrint = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         comboBoxNama = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
         previewImage = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
@@ -441,13 +440,6 @@ public void takePicture() {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -457,9 +449,7 @@ public void takePicture() {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnSavePrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnOpenEndoskopi, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addGap(26, 26, 26))
+                .addGap(110, 110, 110))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -497,9 +487,7 @@ public void takePicture() {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOpenEndoskopi)
-                    .addComponent(jButton1))
+                .addComponent(btnOpenEndoskopi)
                 .addGap(50, 50, 50)
                 .addComponent(btnSavePrint)
                 .addGap(18, 18, 18)
@@ -588,7 +576,7 @@ public void takePicture() {
             .addGroup(layout.createSequentialGroup()
                 .addGap(119, 119, 119)
                 .addComponent(previewImage, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(462, Short.MAX_VALUE))
+                .addContainerGap(471, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -677,12 +665,6 @@ public void takePicture() {
 //        comboBoxNama.insertItemAt(item, 0);
     }//GEN-LAST:event_comboBoxNamaItemStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        controller.printFile();
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
 
 
     private void filterComboBoxItems(JComboBox<String> comboBox, String input) {
@@ -761,7 +743,6 @@ public void takePicture() {
     private javax.swing.JLabel imageSatu;
     private javax.swing.JLabel imageTiga;
     private javax.swing.JLabel imageTujuh;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
