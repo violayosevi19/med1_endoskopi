@@ -5,6 +5,7 @@
 package Controller;
 
 import Dao.SettingDao;
+import Dao.SettingDaoImpl;
 import Model.AssesmentModel;
 import Model.SettingModel;
 import View.Setting;
@@ -21,6 +22,11 @@ public class SettingController {
     Setting view;
     SettingDao dao;
     SettingModel model;
+    
+    public SettingController(Setting view){
+        this.view = view;
+        dao = new SettingDaoImpl();
+    }
     
      public void insert() {
         try {

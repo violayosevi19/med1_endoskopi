@@ -39,6 +39,7 @@ public class Setting extends javax.swing.JFrame {
     
     public Setting() {
         initComponents();
+        controller = new SettingController(this);
         JButton chooseButton = new JButton("Choose Logo");
         chooseButton.setBounds(100,120, 200, 40);
         jPanel1.add(chooseButton);
