@@ -22,7 +22,7 @@ public class SettingDaoImpl implements SettingDao{
         Koneksi koneksi = new Koneksi();
         
         Connection conn = koneksi.getConnection();
-        String sql = "INSERT INTO assesments(nama,phone,kode_pos,logo,alamat,tombol) "
+        String sql = "INSERT INTO setting(nama_rs,phone_rs,kode_pos,logo,alamat,tombol) "
                 + "VALUES (?,?,?,?,?,?)";
         PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, settingModel.getNama());

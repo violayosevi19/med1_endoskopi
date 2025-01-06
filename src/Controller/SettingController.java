@@ -33,12 +33,14 @@ public class SettingController {
             String name = view.getTxtName().getText();
             String phone = view.getTxtPhone().getText();
             String pos = view.getTxtKodePos().getText();
+            String logo = view.pathLogo;
             String tombol = view.getTxtTombol().getText();
             String address = view.getTxtAdress().getText();
             model = new SettingModel();
             model.setNama(name); 
             model.setPhone(phone);
             model.setKode_pos(pos);
+            model.setLogo(logo);
             model.setTombol(tombol);
             model.setAlamat(address);
             
