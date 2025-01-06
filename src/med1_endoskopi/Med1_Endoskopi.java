@@ -38,6 +38,7 @@ public class Med1_Endoskopi {
             
             String generatedUUID = getUniqueCode(); // UUID baru yang dihasilkan
             String UUID = generatedUUID; // UUID kedua dari file
+             System.out.println(UUID);
 
             // Membaca file jika ada
             if (file.exists()) {

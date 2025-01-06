@@ -41,19 +41,19 @@ public class SettingDaoImpl implements SettingDao{
         Connection conn = koneksi.getConnection();
         String sql = "delete from setting";
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.executeQuery();
+        ps.execute();
         
-        String sql2 = "delete from pasien";
+        String sql2 = "delete from pasiens";
         PreparedStatement ps2 = conn.prepareStatement(sql);
-        ps2.executeQuery();
+        ps2.execute();
         
-        String sql3 = "delete from assement";
+        String sql3 = "delete from assesments";
         PreparedStatement ps3 = conn.prepareStatement(sql3);
-        ps3.executeQuery();
+        ps3.execute();
         
-        String sql4 = "delete from user where role!='operator'";
+        String sql4 = "delete from users";
         PreparedStatement ps4 = conn.prepareStatement(sql4);
-        ps4.executeQuery();
+        ps4.execute();
     }
     
 }
