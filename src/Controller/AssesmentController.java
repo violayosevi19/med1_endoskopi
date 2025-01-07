@@ -117,12 +117,22 @@ public class AssesmentController {
             InputStream jasperInputStream = getClass().getClassLoader().getResourceAsStream("Report/LaporanEndoskopi.jasper");
             HashMap<String, Object> parameters = new HashMap<>();
             String baseDir = System.getProperty("user.dir") + "\\";
+            String pathLogo = System.getProperty("user.dir") + "\\logo\\";
             parameters.put("BASE_DIR", baseDir);
+            parameters.put("PATH_LOGO", pathLogo);
             if (conn != null) {
-                String sqlQuery = "SELECT * FROM assesments " +
-                              "JOIN users ON assesments.id_user = users.id " +
-                              "JOIN pasiens ON assesments.pasien_id = pasiens.id " +
-                              "ORDER BY assesments.id DESC LIMIT 1";
+                String sqlQuery = "SELECT \n" +
+                                "    UPPER(setting.nama_rs) AS nama_rs,\n" +
+                                "    assesments.*,\n" +
+                                "    users.*,\n" +
+                                "    pasiens.*, setting.*\n" +
+                                "FROM assesments\n" +
+                                "JOIN users \n" +
+                                "    ON assesments.id_user = users.id \n" +
+                                "JOIN pasiens \n" +
+                                "    ON assesments.pasien_id = pasiens.id, setting\n" +
+                                "ORDER BY assesments.id DESC\n" +
+                                "LIMIT 1";
 
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sqlQuery);
