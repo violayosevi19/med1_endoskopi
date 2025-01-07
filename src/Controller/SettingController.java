@@ -57,6 +57,7 @@ public class SettingController {
      
      public void clearAll() throws Exception {
          dao.ClearAll();
+         JOptionPane.showMessageDialog(view, "DATA BERHASIL DI ");
      }
      
 }

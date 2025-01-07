@@ -307,7 +307,8 @@ public class Setting extends javax.swing.JFrame {
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         try {
-            controller.clearAll();
+           controller.clearAll();
+
         } catch (Exception ex) {
             Logger.getLogger(Setting.class.getName()).log(Level.SEVERE, null, ex);
         }
