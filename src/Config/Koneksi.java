@@ -14,18 +14,18 @@ public class Koneksi {
         if (conn == null) {
             try {
                 // URL koneksi SQLite
-                String jdbcUrl = "jdbc:sqlite:src\\config\\endoskopi.db";
-                
-                conn = DriverManager.getConnection(jdbcUrl);
-//
-//                // Membuat koneksi ke database SQLite
+//                String jdbcUrl = "jdbc:sqlite:src\\config\\endoskopi.db";
+//                
 //                conn = DriverManager.getConnection(jdbcUrl);
-//                String url = "jdbc:mysql://localhost:3307/db_endoskopi";
-//                String user = "root";
-//                String pass = "";
-//                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-//                conn = (Connection) DriverManager.getConnection(url, user, pass);
-                
+//
+                 //Membuat koneksi ke database SQLite
+//                conn = DriverManager.getConnection(jdbcUrl);
+                String url = "jdbc:mysql://localhost:3307/db_endoskopi";
+                String user = "root";
+                String pass = "";
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+                conn = (Connection) DriverManager.getConnection(url, user, pass);
+//                
                 System.out.println("Koneksi ke database berhasil!");
             } catch (SQLException e) {
                 // Logging jika terjadi error
