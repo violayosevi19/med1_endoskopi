@@ -30,60 +30,64 @@ import java.io.OutputStream;
 public class Med1_Endoskopi {
 
     public static void main(String[] args) {
-         try {
-            File file = new File("data.txt");
-            boolean openEncrypt = false;
-            String fileUUID2 = null; // UUID yang dibaca dari file
-            String fileUUID = null;
-            
-            String generatedUUID = getUniqueCode(); // UUID baru yang dihasilkan
-            String UUID = generatedUUID; // UUID kedua dari file
-
-            // Membaca file jika ada
-            if (file.exists()) {
-                try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        if (line.startsWith("equal Code:")) {
-                            try {
-                                fileUUID = line.split(":")[1].trim(); // Memasukkan UUID yang ditemukan
-                            } catch (Exception e) {
-                                break;
-                            }
-                        }
-                        if (line.startsWith("Unique Code:")) {
-                            fileUUID2 = line.split(":")[1].trim(); // Memasukkan UUID kedua
-                            break;
-                        }
-                    }
-                }
-            } else {
-                System.out.println("Kode unik PC: " + generatedUUID + " ditulis ke file.");
-            }
-
-            // Periksa apakah UUID cocok
-            if (fileUUID2 == null  || !fileUUID2.equals(generatedUUID)) {
-                System.out.println("UUID tidak cocok. Mengirim UUID baru ke API...");
-                postUUIDToAPI(generatedUUID);
-                Encrypt enc = new Encrypt();
-                enc.setVisible(true);
-                enc.pack();
-                enc.setLocationRelativeTo(null);
-            } else {
-                System.out.println("UUID cocok, tidak perlu mengirim ke API.");
+//         try {
+//            File file = new File("data.txt");
+//            boolean openEncrypt = false;
+//            String fileUUID2 = null; // UUID yang dibaca dari file
+//            String fileUUID = null;
+//            
+//            String generatedUUID = getUniqueCode(); // UUID baru yang dihasilkan
+//            String UUID = generatedUUID; // UUID kedua dari file
+//
+//            // Membaca file jika ada
+//            if (file.exists()) {
+//                try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+//                    String line;
+//                    while ((line = reader.readLine()) != null) {
+//                        if (line.startsWith("equal Code:")) {
+//                            try {
+//                                fileUUID = line.split(":")[1].trim(); // Memasukkan UUID yang ditemukan
+//                            } catch (Exception e) {
+//                                break;
+//                            }
+//                        }
+//                        if (line.startsWith("Unique Code:")) {
+//                            fileUUID2 = line.split(":")[1].trim(); // Memasukkan UUID kedua
+//                            break;
+//                        }
+//                    }
+//                }
+//            } else {
+//                System.out.println("Kode unik PC: " + generatedUUID + " ditulis ke file.");
+//            }
+//
+//            // Periksa apakah UUID cocok
+//            if (fileUUID2 == null  || !fileUUID2.equals(generatedUUID)) {
+//                System.out.println("UUID tidak cocok. Mengirim UUID baru ke API...");
+//                postUUIDToAPI(generatedUUID);
+//                Encrypt enc = new Encrypt();
+//                enc.setVisible(true);
+//                enc.pack();
+//                enc.setLocationRelativeTo(null);
+//            } else {
+//                System.out.println("UUID cocok, tidak perlu mengirim ke API.");
+//                Login loginFrame = new Login();
+//                loginFrame.setVisible(true);
+//                loginFrame.pack();
+//                loginFrame.setLocationRelativeTo(null);
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            JOptionPane.showMessageDialog(null, "Error membaca file!", "Error", JOptionPane.ERROR_MESSAGE);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            JOptionPane.showMessageDialog(null, "Error mendapatkan kode unik!", "Error", JOptionPane.ERROR_MESSAGE);
+//        }
                 Login loginFrame = new Login();
                 loginFrame.setVisible(true);
                 loginFrame.pack();
                 loginFrame.setLocationRelativeTo(null);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error membaca file!", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error mendapatkan kode unik!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     private static void postUUIDToAPI(String uuid) {
