@@ -44,7 +44,7 @@ public class SettingDaoImpl implements SettingDao{
         ps.execute();
         
         String sql2 = "delete from pasiens";
-        PreparedStatement ps2 = conn.prepareStatement(sql);
+        PreparedStatement ps2 = conn.prepareStatement(sql2);
         ps2.execute();
         
         String sql3 = "delete from assesments";

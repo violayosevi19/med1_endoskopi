@@ -2,7 +2,7 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1500, 992]"/>
     </Property>
@@ -68,11 +68,13 @@
                   <Component id="imageEmpat" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="imageLima" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
-                  <Component id="imageEnam" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="imageDelapan" alignment="0" min="-2" pref="177" max="-2" attributes="0"/>
-                  <Component id="imageTujuh" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="imageLima" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="imageEnam" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="imageTujuh" alignment="3" min="-2" pref="180" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -271,9 +273,6 @@
     <Component class="javax.swing.JLabel" name="imageEnam">
     </Component>
     <Component class="javax.swing.JLabel" name="imageTujuh">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel7"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="imageDelapan">
     </Component>

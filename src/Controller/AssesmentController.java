@@ -91,7 +91,7 @@ public class AssesmentController {
         try {
             // Ambil daftar nama dari database
             List<Object[]> pasiens = dao.getPasien();
-            System.out.println("Data Pasiens " + pasiens.get(1));
+//            System.out.println("Data Pasiens " + pasiens.get(0));
             
 
             // Isi data ke JComboBox
@@ -114,7 +114,8 @@ public class AssesmentController {
         try {
             Koneksi koneksi = new Koneksi();
             Connection conn = koneksi.getConnection();
-            InputStream jasperInputStream = getClass().getClassLoader().getResourceAsStream("Report/LaporanEndoskopi.jasper");
+            InputStream jasperInputStream = getClass().getClassLoader().getResourceAsStream("Report//LaporanEndoskopi.jasper");
+            String file = "src/Report/LaporanEndoskopi.jasper";
             HashMap<String, Object> parameters = new HashMap<>();
             String baseDir = System.getProperty("user.dir") + "\\";
             String pathLogo = System.getProperty("user.dir") + "\\logo\\";
@@ -123,6 +124,7 @@ public class AssesmentController {
             if (conn != null) {
                 String sqlQuery = "SELECT \n" +
                                 "    UPPER(setting.nama_rs) AS nama_rs,\n" +
+                                "DATE(pasiens.tgl_lahir) AS tgl_lahir ,\n"+
                                 "    assesments.*,\n" +
                                 "    users.*,\n" +
                                 "    pasiens.*, setting.*\n" +
@@ -137,6 +139,7 @@ public class AssesmentController {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sqlQuery);
                 
+                System.out.println(rs);
            
                 // Menggunakan JRResultSetDataSource untuk memberikan ResultSet ke JasperReports
                 JRResultSetDataSource jrResultSetDataSource = new JRResultSetDataSource(rs);

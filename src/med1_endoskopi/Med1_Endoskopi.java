@@ -35,10 +35,11 @@ public class Med1_Endoskopi {
             boolean openEncrypt = false;
             String fileUUID2 = null; // UUID yang dibaca dari file
             String fileUUID = null;
+            String test = "MEDIUTAMA-UTAMA-MEDI-2025";
             
             String generatedUUID = getUniqueCode(); // UUID baru yang dihasilkan
             String UUID = generatedUUID; // UUID kedua dari file
-             System.out.println(UUID);
+             System.out.println(test);
 
             // Membaca file jika ada
             if (file.exists()) {
@@ -59,13 +60,13 @@ public class Med1_Endoskopi {
                     }
                 }
             } else {
-                System.out.println("Kode unik PC: " + generatedUUID + " ditulis ke file.");
+                System.out.println("Kode unik PC: " + test + " ditulis ke file.");
             }
 
             // Periksa apakah UUID cocok
-            if (fileUUID2 == null  || !fileUUID2.equals(generatedUUID)) {
+            if (fileUUID2 == null  || !fileUUID2.equals(test)) {
                 System.out.println("UUID tidak cocok. Mengirim UUID baru ke API...");
-                postUUIDToAPI(generatedUUID);
+                postUUIDToAPI(test);
                 Encrypt enc = new Encrypt();
                 enc.setVisible(true);
                 enc.pack();
