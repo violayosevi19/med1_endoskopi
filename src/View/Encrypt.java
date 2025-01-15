@@ -186,8 +186,10 @@ public class Encrypt extends javax.swing.JFrame {
             Logger.getLogger(Encrypt.class.getName()).log(Level.SEVERE, null, ex);
         }
 //        postUUIDToAPI(txtEncrypt.getText());
-         File file = new File("data.txt");
-        System.out.println("File data.txt tidak ditemukan. Membuat file baru dengan nilai default.");
+        File file = new File("data.txt");
+        if (!file.exists()) {
+            System.out.println("File data.txt tidak ditemukan. Membuat file baru dengan nilai default.");
+        }
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                     writer.write("true"); // Menulis nilai default ke file
                     writer.newLine();
@@ -196,8 +198,14 @@ public class Encrypt extends javax.swing.JFrame {
                     writer.write("equal Code: ");
                     System.out.println("Kode unik PC: " + txtEncrypt.getText() + " ditulis ke file.");
                 } catch (IOException ex) {
-            Logger.getLogger(Encrypt.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                    Logger.getLogger(Encrypt.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                 // Arahkan ke form login
+        this.dispose(); // Tutup form saat ini
+        Login loginFrame = new Login();
+        loginFrame.setVisible(true);
+        loginFrame.pack();
+        loginFrame.setLocationRelativeTo(null);
                 
     }//GEN-LAST:event_jButton2ActionPerformed
 

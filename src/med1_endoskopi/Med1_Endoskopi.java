@@ -61,6 +61,10 @@ public class Med1_Endoskopi {
                 }
             } else {
                 System.out.println("Kode unik PC: " + UUID + " ditulis ke file.");
+//                Login loginFrame = new Login();
+//                loginFrame.setVisible(true);
+//                loginFrame.pack();
+//                loginFrame.setLocationRelativeTo(null);
             }
 
             // Periksa apakah UUID cocok
