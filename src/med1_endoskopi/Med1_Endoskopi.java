@@ -39,7 +39,7 @@ public class Med1_Endoskopi {
             
             String generatedUUID = getUniqueCode(); // UUID baru yang dihasilkan
             String UUID = generatedUUID; // UUID kedua dari file
-             System.out.println(test);
+             System.out.println(UUID);
 
             // Membaca file jika ada
             if (file.exists()) {
@@ -60,13 +60,13 @@ public class Med1_Endoskopi {
                     }
                 }
             } else {
-                System.out.println("Kode unik PC: " + test + " ditulis ke file.");
+                System.out.println("Kode unik PC: " + UUID + " ditulis ke file.");
             }
 
             // Periksa apakah UUID cocok
-            if (fileUUID2 == null  || !fileUUID2.equals(test)) {
+            if (fileUUID2 == null  || !fileUUID2.equals(UUID)) {
                 System.out.println("UUID tidak cocok. Mengirim UUID baru ke API...");
-                postUUIDToAPI(test);
+                postUUIDToAPI(UUID);
                 Encrypt enc = new Encrypt();
                 enc.setVisible(true);
                 enc.pack();
@@ -90,7 +90,7 @@ public class Med1_Endoskopi {
 
     private static void postUUIDToAPI(String uuid) {
         try {
-            String apiUrl = "https://your-api-url.com/endpoint"; // Ganti dengan URL API Anda
+            String apiUrl = "http://medi.digimoment.web.id/api/license"; // Ganti dengan URL API Anda
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
@@ -98,7 +98,7 @@ public class Med1_Endoskopi {
             connection.setDoOutput(true);
 
             // Data JSON yang dikirim
-            String jsonPayload = "{ \"uuid\": \"" + uuid + "\" }";
+            String jsonPayload = "{ \"license\": \"" + uuid + "\" }";
 
             // Kirim data
             try (OutputStream os = connection.getOutputStream()) {
@@ -107,7 +107,9 @@ public class Med1_Endoskopi {
             }
 
             // Periksa respon
+            
             int responseCode = connection.getResponseCode();
+            System.out.println(responseCode);
             if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
                 System.out.println("UUID berhasil dikirim ke API.");
             } else {

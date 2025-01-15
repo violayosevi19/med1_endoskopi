@@ -9,6 +9,8 @@ import Dao.AssesmentDao;
 import Dao.AssesmentDaoImpl;
 import Model.AssesmentModel;
 import View.Assesment;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -114,8 +116,10 @@ public class AssesmentController {
         try {
             Koneksi koneksi = new Koneksi();
             Connection conn = koneksi.getConnection();
-            InputStream jasperInputStream = getClass().getClassLoader().getResourceAsStream("Report//LaporanEndoskopi.jasper");
-            String file = "src/Report/LaporanEndoskopi.jasper";
+//            String file = "./Report//LaporanEndoskopi.jasper";
+//            InputStream jasperInputStream = getClass().getClassLoader().getResourceAsStream(file);
+            InputStream jasperInputStream = new FileInputStream(new File("./src/Report/LaporanEndoskopi.jasper"));
+
             HashMap<String, Object> parameters = new HashMap<>();
             String baseDir = System.getProperty("user.dir") + "\\";
             String pathLogo = System.getProperty("user.dir") + "\\logo\\";

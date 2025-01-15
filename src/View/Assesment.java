@@ -36,6 +36,8 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 
 
@@ -49,6 +51,11 @@ public class Assesment extends javax.swing.JFrame {
     public JTextArea inputKeluhan, inputDiagnosis;
     public List<String> filePaths = new ArrayList<>();
     public List<String> imagePaths = new ArrayList<>();
+    
+    private Statement stat;
+    private ResultSet res;
+    private String tombol;
+    private String key_pic;
 
     
     AssesmentController controller;
@@ -70,6 +77,23 @@ public class Assesment extends javax.swing.JFrame {
 //        controller.viewTable();
 //        controller.listNama(); 
 
+//        try (
+//            Statement stat = conn.createStatement();
+//             ResultSet res = stat.executeQuery("SELECT tombol FROM setting LIMIT 1")) {
+//            
+//            if (res.next()) {
+//                tombol = res.getString("tombol");
+//                
+//                if(tombol == "1")
+//                {
+//                    String key_pic = "VK_1";
+//                }else{
+//                    
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Assesment.class.getName()).log(Level.SEVERE, null, ex);
+//        }
  // Tambahkan ini agar JFrame mendeteksi input keyboard
         this.addKeyListener(new KeyAdapter() {
             @Override
@@ -99,6 +123,8 @@ public class Assesment extends javax.swing.JFrame {
         comboPasien = comboBoxNama;
         
         AutoCompleteDecorator.decorate(comboBoxNama);
+        
+        
         
     }
     
@@ -195,13 +221,17 @@ public class Assesment extends javax.swing.JFrame {
         new Thread(() -> {
             try {
                 grabber.start();
-
+                
                 // Tambahkan KeyListener untuk menangkap input keyboard
                 frame.addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyPressed(KeyEvent e) {
                         System.out.println(e.getKeyCode());
                         System.out.println("Kamu tekan tombol: " + e.getKeyText(e.getKeyCode()));
+                        
+                        
+                        
+                        
                         if (e.getKeyCode() == KeyEvent.VK_1) {
                             System.out.println("masuk yaaa");
                             takePicture();
