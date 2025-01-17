@@ -61,8 +61,8 @@ public class Assesment extends javax.swing.JFrame {
     AssesmentController controller;
     private boolean captureImage = false;
     CvCapture capture;
-    OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
-//    OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(1);
+//    OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
+    OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(1);
     
 
     private Connection conn;

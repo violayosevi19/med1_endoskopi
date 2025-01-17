@@ -60,13 +60,13 @@ public class Med1_Endoskopi {
                     }
                 }
             } else {
-                System.out.println("Kode unik PC: " + UUID + " ditulis ke file.");
+                System.out.println("Kode unik PC: " + test + " ditulis ke file.");
             }
 
             // Periksa apakah UUID cocok
-            if (fileUUID2 == null  || !fileUUID2.equals(UUID)) {
+            if (fileUUID2 == null  || !fileUUID2.equals(test)) {
                 System.out.println("UUID tidak cocok. Mengirim UUID baru ke API...");
-                postUUIDToAPI(UUID);
+                postUUIDToAPI(test);
                 Encrypt enc = new Encrypt();
                 enc.setVisible(true);
                 enc.pack();
