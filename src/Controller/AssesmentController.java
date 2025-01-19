@@ -7,8 +7,9 @@ package Controller;
 import Config.Koneksi;
 import Dao.AssesmentDao;
 import Dao.AssesmentDaoImpl;
+//import MainView.Assesment;
 import Model.AssesmentModel;
-import View.Assesment;
+import MainView.Assesment;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -33,30 +34,30 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author user
  */
 public class AssesmentController {
-    Assesment view;
+    Assesment MainView;
     AssesmentModel model;
     AssesmentDao dao;
     
-    public AssesmentController(Assesment view){
-        this.view = view;
+    public AssesmentController(Assesment MainView){
+        this.MainView = MainView;
         dao = new AssesmentDaoImpl();
     }
     
     public void clearForm() {
-        view.getComboBoxNama().setSelectedItem(null);
-        view.getTxtKeluhan().setText("");
-        view.getTxtDiagnosis().setText("");
+        MainView.getComboBoxNama().setSelectedItem(null);
+        MainView.getTxtKeluhan().setText("");
+        MainView.getTxtDiagnosis().setText("");
     }
     
      public void insert() {
         try {
-            String selectedNama = (String) view.getComboBoxNama().getSelectedItem();
+            String selectedNama = (String) MainView.getComboBoxNama().getSelectedItem();
             int idPasien = pasienMap.get(selectedNama);  
-            String keluhan =  view.getTxtKeluhan().getText();
-            String diagnosis =  view.getTxtDiagnosis().getText();
+            String keluhan =  MainView.getTxtKeluhan().getText();
+            String diagnosis =  MainView.getTxtDiagnosis().getText();
             
-            List<String> imagePaths = view.imagePaths;
-            Object data = view.currentUser.get("id");
+            List<String> imagePaths = MainView.imagePaths;
+            Object data = MainView.currentUser.get("id");
             int userId = (int) data; 
             
             model = new AssesmentModel();
@@ -77,7 +78,7 @@ public class AssesmentController {
             model.setGambar_tujuh(imagePaths.size() > 6 ? imagePaths.get(6) : null);
             model.setGambar_delapan(imagePaths.size() > 7 ? imagePaths.get(7) : null);
             dao.insert(model);
-            JOptionPane.showMessageDialog(view, "Entry data ok");
+            JOptionPane.showMessageDialog(MainView, "Entry data ok");
             
             
             
@@ -101,7 +102,7 @@ public class AssesmentController {
                 int id = (int) pasien[0];
                 String nama = (String) pasien[1];
             
-                view.getComboBoxNama().addItem(nama); // Menambahkan item ke JComboBox
+                MainView.getComboBoxNama().addItem(nama); // Menambahkan item ke JComboBox
                 pasienMap.put(nama, id);
                   
                

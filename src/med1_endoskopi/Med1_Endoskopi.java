@@ -6,7 +6,7 @@ package med1_endoskopi;
 
 import Config.Koneksi;
 import View.Encrypt;
-import View.Login;
+import MainView.Main;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -73,10 +73,10 @@ public class Med1_Endoskopi {
                 enc.setLocationRelativeTo(null);
             } else {
                 System.out.println("UUID cocok, tidak perlu mengirim ke API.");
-                Login loginFrame = new Login();
-                loginFrame.setVisible(true);
-                loginFrame.pack();
-                loginFrame.setLocationRelativeTo(null);
+                Main main = new Main();
+                main.setVisible(true);
+                main.pack();
+                main.setLocationRelativeTo(null);
             }
 
         } catch (IOException e) {

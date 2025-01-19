@@ -99,6 +99,7 @@ public class EndoskopiModal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        frame1 = new com.googlecode.javacv.Frame();
         jPanel1 = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
@@ -444,6 +445,7 @@ public class EndoskopiModal extends javax.swing.JFrame {
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnTake;
+    private com.googlecode.javacv.Frame frame1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel previewImage;
     // End of variables declaration//GEN-END:variables
