@@ -4,7 +4,7 @@ import Dao.LoginDao;
 import Dao.LoginDaoImpl;
 import Model.LoginModel;
 import View.Assesment;
-import View.Login;
+import MainView.Login;
 import View.MenuEndoskopi;
 import View.Setting;
 import javax.swing.JOptionPane;
@@ -16,46 +16,45 @@ import java.util.Map;
 
 public class LoginController {
 
-    Login view;
+//    Login view;
+    Login mainView;
     LoginDao dao;
     LoginModel model;
     private static LoginModel currentUser;
 
-    public LoginController(Login view) {
-        this.view = view;
+    public LoginController(Login mainView) {
+        this.mainView = mainView;
         dao = new LoginDaoImpl();
     }
 
     public void login() {
         try {
-            String username = view.getInputUsername().getText();
-            String password = new String(view.getInputPassword().getPassword());
+            String username = mainView.getTxtUsername().getText();
+            String password = new String(mainView.getTxtPassword().getPassword());
 
             model = new LoginModel();
             model.setUsername(username);
             model.setPassword(password);
             System.out.println(password);
             if (username.equals("med1") && password.equals("$mediutama")) {
-                JOptionPane.showMessageDialog(view, "Login Berhasil!");
-                Setting setting = new Setting();
-                setting.setVisible(true);
-                setting.pack();
-                setting.setLocationRelativeTo(null);
-                view.dispose(); // Menutup form login
+                JOptionPane.showMessageDialog(mainView, "Login Berhasil!");
+                  mainView.removeAll();
+                  mainView.add(new Assesment());
+                  mainView.repaint();
+                  mainView.revalidate();
             } else {
                 Map<String, Object> dataUser = dao.login(model);
 
                 if (dataUser != null) {
 //               currentUser = dataUser;
                     
-                    JOptionPane.showMessageDialog(view, "Login Berhasil!");
-                    MenuEndoskopi menuEndoskopi = new MenuEndoskopi(dataUser);
-                    menuEndoskopi.setVisible(true);
-                    menuEndoskopi.pack();
-                    menuEndoskopi.setLocationRelativeTo(null);
-                    view.dispose(); // Menutup form login
+                    JOptionPane.showMessageDialog(mainView, "Login Berhasil!");
+                    mainView.removeAll();
+                  mainView.add(new Assesment());
+                  mainView.repaint();
+                  mainView.revalidate();
                 } else {
-                    JOptionPane.showMessageDialog(view, "Username atau Password salah!");
+                    JOptionPane.showMessageDialog(mainView, "Username atau Password salah!");
                 }
             }
 

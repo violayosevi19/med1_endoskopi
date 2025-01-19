@@ -4,6 +4,10 @@
  */
 package MainView;
 
+import Controller.RegisterUserController;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 /**
  *
  * @author HP
@@ -13,8 +17,34 @@ public class RegisterUserNew extends javax.swing.JPanel {
     /**
      * Creates new form Login
      */
+    RegisterUserController controller;
     public RegisterUserNew() {
         initComponents();
+//        RegisterUserController controller;
+    }
+
+    public JTextField getTxtFullname() {
+        return txtFullname;
+    }
+
+    public void setTxtFullname(JTextField txtFullname) {
+        this.txtFullname = txtFullname;
+    }
+
+    public JPasswordField getTxtPassword() {
+        return txtPassword;
+    }
+
+    public void setTxtPassword(JPasswordField txtPassword) {
+        this.txtPassword = txtPassword;
+    }
+
+    public JTextField getTxtUsername() {
+        return txtUsername;
+    }
+
+    public void setTxtUsername(JTextField txtUsername) {
+        this.txtUsername = txtUsername;
     }
 
     /**
@@ -201,7 +231,7 @@ public class RegisterUserNew extends javax.swing.JPanel {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        //        controller.insert();
+     controller.insert();
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

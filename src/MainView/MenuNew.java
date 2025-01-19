@@ -4,6 +4,8 @@
  */
 package MainView;
 
+import java.awt.Color;
+
 /**
  *
  * @author HP
@@ -59,9 +61,9 @@ public class MenuNew extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(59, 59, 59)
                 .addComponent(txtDate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 901, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 904, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,9 +83,16 @@ public class MenuNew extends javax.swing.JPanel {
         pn_menuMain.setBackground(new java.awt.Color(255, 255, 255));
 
         btn_register.setBackground(new java.awt.Color(102, 255, 102));
+        btn_register.setBorder(new javax.swing.border.MatteBorder(null));
         btn_register.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_registerMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_registerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_registerMouseExited(evt);
             }
         });
 
@@ -109,9 +118,16 @@ public class MenuNew extends javax.swing.JPanel {
         );
 
         btn_register1.setBackground(new java.awt.Color(102, 102, 255));
+        btn_register1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btn_register1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_register1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_register1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_register1MouseExited(evt);
             }
         });
 
@@ -132,14 +148,21 @@ public class MenuNew extends javax.swing.JPanel {
             btn_register1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btn_register1Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addComponent(lb_register1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addComponent(lb_register1, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                 .addGap(56, 56, 56))
         );
 
         btn_register2.setBackground(new java.awt.Color(255, 0, 51));
+        btn_register2.setBorder(new javax.swing.border.MatteBorder(null));
         btn_register2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_register2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_register2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_register2MouseExited(evt);
             }
         });
 
@@ -160,7 +183,7 @@ public class MenuNew extends javax.swing.JPanel {
             btn_register2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btn_register2Layout.createSequentialGroup()
                 .addGap(59, 59, 59)
-                .addComponent(lb_register2, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addComponent(lb_register2, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                 .addGap(54, 54, 54))
         );
 
@@ -231,15 +254,38 @@ public class MenuNew extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_register1MouseClicked
 
     private void btn_register2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_register2MouseClicked
-//      currentUser = null;
+        //      currentUser = null;
         jPanel1.removeAll();
         jPanel1.add(new Login());
         jPanel1.repaint();
         jPanel1.revalidate();
 
         // Menutup aplikasi dan kembali ke form login
-
     }//GEN-LAST:event_btn_register2MouseClicked
+
+    private void btn_registerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_registerMouseEntered
+        btn_register.setBackground(new Color(102,105,102));
+    }//GEN-LAST:event_btn_registerMouseEntered
+
+    private void btn_registerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_registerMouseExited
+        btn_register.setBackground(new Color(102,255,102));
+    }//GEN-LAST:event_btn_registerMouseExited
+
+    private void btn_register1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_register1MouseEntered
+        btn_register1.setBackground(new Color(102,105,102));
+    }//GEN-LAST:event_btn_register1MouseEntered
+
+    private void btn_register1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_register1MouseExited
+        btn_register1.setBackground(new Color(102,102,255));
+    }//GEN-LAST:event_btn_register1MouseExited
+
+    private void btn_register2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_register2MouseEntered
+        btn_register2.setBackground(new Color(102,105,102));
+    }//GEN-LAST:event_btn_register2MouseEntered
+
+    private void btn_register2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_register2MouseExited
+        btn_register2.setBackground(new Color(255,0,51));
+    }//GEN-LAST:event_btn_register2MouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

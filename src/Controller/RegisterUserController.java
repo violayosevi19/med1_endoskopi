@@ -3,9 +3,10 @@ package Controller;
 
 import Dao.RegisterUserDaoImpl;
 import Dao.RegisterUsersDao;
+import MainView.RegisterUserNew;
 import Model.RegisterUserModel;
-import View.Login;
-import View.RegisterUser;
+//import View.Login;
+//import View.RegisterUser;
 import javax.swing.JOptionPane;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -16,20 +17,20 @@ import java.util.Base64;
 
 public class RegisterUserController {
 
-    RegisterUser view;
+    RegisterUserNew mainView;
     RegisterUserModel model;
     RegisterUsersDao dao;
     
-    public RegisterUserController(RegisterUser view){
-        this.view = view;
+    public RegisterUserController(RegisterUserNew mainView){
+        this.mainView = mainView;
         dao = new RegisterUserDaoImpl();
     }
     
     public void insert() {
         try {
-            String username = view.getTxtUsername().getText();
-            String password =  new String(view.getTxtPassword().getPassword());
-            String fullName =  view.getTxtFullname().getText();
+            String username = mainView.getTxtUsername().getText();
+            String password =  new String(mainView.getTxtPassword().getPassword());
+            String fullName =  mainView.getTxtFullname().getText();
             String hashedPassword = hashPassword(password);
             
             model = new RegisterUserModel();
@@ -39,10 +40,10 @@ public class RegisterUserController {
             
            
             dao.insert(model);
-            JOptionPane.showMessageDialog(view, "Registrasi Berhasil!");
+            JOptionPane.showMessageDialog(mainView, "Registrasi Berhasil!");
             
             // Menutup atau menyembunyikan form pendaftaran
-            view.setVisible(false);  // Jika view adalah form pendaftaran
+            mainView.setVisible(false);  // Jika view adalah form pendaftaran
 
             // Membuka kembali form login
             Login loginForm = new Login();  // Misalnya Anda memiliki kelas LoginForm

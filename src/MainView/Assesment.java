@@ -381,7 +381,7 @@ public void takePicture() {
         txtDiagnosis = new javax.swing.JTextArea();
         btnOpenEndoskopi = new javax.swing.JButton();
         btnSavePrint = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
+        btnBackAction = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         comboBoxNama = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -467,10 +467,10 @@ public void takePicture() {
             }
         });
 
-        btnBack.setText("Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
+        btnBackAction.setText("Back");
+        btnBackAction.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
+                btnBackActionActionPerformed(evt);
             }
         });
 
@@ -523,7 +523,7 @@ public void takePicture() {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBackAction, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -552,7 +552,7 @@ public void takePicture() {
                 .addGap(18, 18, 18)
                 .addComponent(btnSavePrint, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(btnBack)
+                .addComponent(btnBackAction)
                 .addContainerGap(68, Short.MAX_VALUE))
         );
 
@@ -626,18 +626,17 @@ public void takePicture() {
 
     private void btnSavePrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavePrintActionPerformed
         controller.insert();
-        controller.clearForm();
+
         controller.printFile();
     }//GEN-LAST:event_btnSavePrintActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        //        MenuEndoskopi login = new MenuEndoskopi();
-        //        login.setVisible(true);
-        //        login.pack();
-        //        login.setLocationRelativeTo(null);
-        //        this.dispose();
-        //        System.out.println("ini data image " +imagePaths);
-    }//GEN-LAST:event_btnBackActionPerformed
+    private void btnBackActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionActionPerformed
+        controller.clearForm();
+        jPanel1.removeAll();
+        jPanel1.add(new MenuNew());
+        jPanel1.repaint();
+        jPanel1.revalidate();
+    }//GEN-LAST:event_btnBackActionActionPerformed
 
     private void comboBoxNamaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxNamaItemStateChanged
         if(evt.getStateChange() == ItemEvent.SELECTED){
@@ -650,7 +649,7 @@ public void takePicture() {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnBackAction;
     private javax.swing.JButton btnOpenEndoskopi;
     private javax.swing.JButton btnSavePrint;
     private javax.swing.JComboBox<String> comboBoxNama;

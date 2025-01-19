@@ -4,6 +4,11 @@
  */
 package MainView;
 
+import Controller.LoginController;
+import java.lang.ModuleLayer.Controller;
+import javax.swing.JButton;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.text.View;
 
 /**
@@ -16,10 +21,54 @@ public class Login extends javax.swing.JPanel {
      * Creates new form Login
      */
     
-    View Main;
+
+    LoginController controller;
     public Login() {
         initComponents();
+        controller = new LoginController(this);
     }
+
+    public LoginController getController() {
+        return controller;
+    }
+
+    public void setController(LoginController controller) {
+        this.controller = controller;
+    }
+
+    public JButton getBtnRegister() {
+        return btnRegister;
+    }
+
+    public void setBtnRegister(JButton btnRegister) {
+        this.btnRegister = btnRegister;
+    }
+
+    public JButton getBtnSubmit() {
+        return btnSubmit;
+    }
+
+    public void setBtnSubmit(JButton btnSubmit) {
+        this.btnSubmit = btnSubmit;
+    }
+
+    public JPasswordField getTxtPassword() {
+        return txtPassword;
+    }
+
+    public void setTxtPassword(JPasswordField txtPassword) {
+        this.txtPassword = txtPassword;
+    }
+
+    public JTextField getTxtUsername() {
+        return txtUsername;
+    }
+
+    public void setTxtUsername(JTextField txtUsername) {
+        this.txtUsername = txtUsername;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -204,7 +253,7 @@ public class Login extends javax.swing.JPanel {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        //        controller.insert();
+       controller.login();
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
