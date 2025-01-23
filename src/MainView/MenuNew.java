@@ -5,6 +5,7 @@
 package MainView;
 
 import java.awt.Color;
+import java.util.Map;
 
 /**
  *
@@ -15,8 +16,12 @@ public class MenuNew extends javax.swing.JPanel {
     /**
      * Creates new form MenuNew
      */
+    
+    public Map<String, Object> currentUser;
     public MenuNew() {
         initComponents();
+//        this.currentUser = user;
+//        labelNama.setText((String) user.get("fullName"));
     }
 
     /**
@@ -31,7 +36,7 @@ public class MenuNew extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         txtDate = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbl_nama = new javax.swing.JLabel();
         pn_container = new javax.swing.JPanel();
         pn_menuMain = new javax.swing.JPanel();
         btn_register = new javax.swing.JPanel();
@@ -50,9 +55,9 @@ public class MenuNew extends javax.swing.JPanel {
         txtDate.setForeground(new java.awt.Color(255, 255, 255));
         txtDate.setText("Date");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("NamaDokter");
+        lbl_nama.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbl_nama.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_nama.setText("NamaDokter");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -62,7 +67,7 @@ public class MenuNew extends javax.swing.JPanel {
                 .addGap(59, 59, 59)
                 .addComponent(txtDate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 904, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(lbl_nama)
                 .addContainerGap(278, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -70,7 +75,7 @@ public class MenuNew extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(lbl_nama)
                     .addComponent(txtDate))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -160,9 +165,6 @@ public class MenuNew extends javax.swing.JPanel {
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btn_register2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_register2MouseExited(evt);
             }
         });
 
@@ -283,21 +285,17 @@ public class MenuNew extends javax.swing.JPanel {
         btn_register2.setBackground(new Color(102,105,102));
     }//GEN-LAST:event_btn_register2MouseEntered
 
-    private void btn_register2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_register2MouseExited
-        btn_register2.setBackground(new Color(255,0,51));
-    }//GEN-LAST:event_btn_register2MouseExited
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_register;
     private javax.swing.JPanel btn_register1;
     private javax.swing.JPanel btn_register2;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lb_register;
     private javax.swing.JLabel lb_register1;
     private javax.swing.JLabel lb_register2;
+    private javax.swing.JLabel lbl_nama;
     private javax.swing.JPanel pn_container;
     private javax.swing.JPanel pn_menuMain;
     private javax.swing.JLabel txtDate;

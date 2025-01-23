@@ -7,6 +7,7 @@ package MainView;
 import Controller.LoginController;
 import java.lang.ModuleLayer.Controller;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.View;
@@ -66,6 +67,14 @@ public class Login extends javax.swing.JPanel {
 
     public void setTxtUsername(JTextField txtUsername) {
         this.txtUsername = txtUsername;
+    }
+
+    public JPanel getjPanel3() {
+        return jPanel3;
+    }
+
+    public void setjPanel3(JPanel jPanel3) {
+        this.jPanel3 = jPanel3;
     }
     
     

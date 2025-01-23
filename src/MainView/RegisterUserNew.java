@@ -5,6 +5,7 @@
 package MainView;
 
 import Controller.RegisterUserController;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -21,6 +22,7 @@ public class RegisterUserNew extends javax.swing.JPanel {
     public RegisterUserNew() {
         initComponents();
 //        RegisterUserController controller;
+        controller = new RegisterUserController(this);
     }
 
     public JTextField getTxtFullname() {
@@ -29,6 +31,14 @@ public class RegisterUserNew extends javax.swing.JPanel {
 
     public void setTxtFullname(JTextField txtFullname) {
         this.txtFullname = txtFullname;
+    }
+
+    public JPanel getjPanel3() {
+        return jPanel3;
+    }
+
+    public void setjPanel3(JPanel jPanel3) {
+        this.jPanel3 = jPanel3;
     }
 
     public JPasswordField getTxtPassword() {

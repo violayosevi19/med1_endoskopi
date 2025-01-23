@@ -5,7 +5,7 @@ import Dao.RegisterUserDaoImpl;
 import Dao.RegisterUsersDao;
 import MainView.RegisterUserNew;
 import Model.RegisterUserModel;
-//import View.Login;
+import View.Login;
 //import View.RegisterUser;
 import javax.swing.JOptionPane;
 import java.util.logging.Logger;
@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import javax.swing.JPanel;
 
 
 public class RegisterUserController {
@@ -43,11 +44,14 @@ public class RegisterUserController {
             JOptionPane.showMessageDialog(mainView, "Registrasi Berhasil!");
             
             // Menutup atau menyembunyikan form pendaftaran
-            mainView.setVisible(false);  // Jika view adalah form pendaftaran
-
+//            mainView.setVisible(false);  // Jika view adalah form pendaftaran
+            mainView.getjPanel3().removeAll();
+        mainView.getjPanel3().add(new MainView.Login());
+        mainView.getjPanel3().repaint();
+        mainView.getjPanel3().revalidate();
             // Membuka kembali form login
-            Login loginForm = new Login();  // Misalnya Anda memiliki kelas LoginForm
-            loginForm.setVisible(true);  // Menampilkan form login
+//            Login loginForm = new Login();  // Misalnya Anda memiliki kelas LoginForm
+//            loginForm.setVisible(true);  // Menampilkan form login
         } catch (Exception ex) {
             Logger.getLogger(AssesmentController.class.getName()).log(Level.SEVERE, null, ex);
         }

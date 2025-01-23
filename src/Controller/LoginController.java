@@ -5,6 +5,7 @@ import Dao.LoginDaoImpl;
 import Model.LoginModel;
 import View.Assesment;
 import MainView.Login;
+import MainView.MenuNew;
 import View.MenuEndoskopi;
 import View.Setting;
 import javax.swing.JOptionPane;
@@ -38,22 +39,22 @@ public class LoginController {
             System.out.println(password);
             if (username.equals("med1") && password.equals("$mediutama")) {
                 JOptionPane.showMessageDialog(mainView, "Login Berhasil!");
-                  mainView.removeAll();
-                  mainView.add(new Assesment());
-                  mainView.repaint();
-                  mainView.revalidate();
+                  mainView.getjPanel3().removeAll();
+                  mainView.getjPanel3().add(new MenuNew());
+                  mainView.getjPanel3().repaint();
+                  mainView.getjPanel3().revalidate();
             } else {
                 Map<String, Object> dataUser = dao.login(model);
 
                 if (dataUser != null) {
-//               currentUser = dataUser;
+//                    Map<String, Object> currentUser =  dataUser;
                     
                     JOptionPane.showMessageDialog(mainView, "Login Berhasil!");
-                    mainView.removeAll();
-                  mainView.add(new Assesment());
-                  mainView.repaint();
-                  mainView.revalidate();
-                } else {
+                    mainView.getjPanel3().removeAll();
+                    mainView.getjPanel3().add(new Assesment());
+                    mainView.getjPanel3().repaint();
+                    mainView.getjPanel3().revalidate();
+                  } else {
                     JOptionPane.showMessageDialog(mainView, "Username atau Password salah!");
                 }
             }
@@ -63,6 +64,7 @@ public class LoginController {
         } catch (Exception ex) {
             Logger.getLogger(AssesmentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     public static LoginModel getCurrentUser() {

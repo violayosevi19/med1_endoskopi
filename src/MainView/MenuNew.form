@@ -54,7 +54,7 @@
                       <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                       <Component id="txtDate" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="904" max="32767" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_nama" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="278" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -64,7 +64,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="30" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_nama" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtDate" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="31" max="32767" attributes="0"/>
@@ -84,7 +84,7 @@
                 <Property name="text" type="java.lang.String" value="Date"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="lbl_nama">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="1"/>
@@ -280,7 +280,6 @@
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_register2MouseClicked"/>
                     <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_register2MouseEntered"/>
-                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_register2MouseExited"/>
                   </Events>
 
                   <Layout>
