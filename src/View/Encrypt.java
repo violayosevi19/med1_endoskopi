@@ -186,7 +186,7 @@ public class Encrypt extends javax.swing.JFrame {
             Logger.getLogger(Encrypt.class.getName()).log(Level.SEVERE, null, ex);
         }
 //        postUUIDToAPI(txtEncrypt.getText());
-        File file = new File("data.txt");
+        File file = new File("./src/test.txt");
         if (!file.exists()) {
             System.out.println("File data.txt tidak ditemukan. Membuat file baru dengan nilai default.");
         }
@@ -199,7 +199,7 @@ public class Encrypt extends javax.swing.JFrame {
                     System.out.println("Kode unik PC: " + txtEncrypt.getText() + " ditulis ke file.");
                 } catch (IOException ex) {
                     Logger.getLogger(Encrypt.class.getName()).log(Level.SEVERE, null, ex);
-                }
+             }
                  // Arahkan ke form login
         this.dispose(); // Tutup form saat ini
         Login loginFrame = new Login();

@@ -5,6 +5,8 @@
 package View;
 
 import Controller.LoginController;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -17,6 +19,8 @@ public class Login extends javax.swing.JFrame {
     LoginController controller;
     public Login() {
         initComponents();
+//        Image icon = new ImageIcon(getClass().getResource("/icon/icon.png")).getImage(); 
+//        this.setIconImage(icon);
         controller = new LoginController(this);
         
     }
@@ -48,7 +52,6 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         Right = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         Left = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -61,45 +64,39 @@ public class Login extends javax.swing.JFrame {
         btnRegister = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
+        setIconImages(null);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(null);
 
-        Right.setBackground(new java.awt.Color(255, 0, 51));
+        Right.setBackground(new java.awt.Color(255, 255, 153));
         Right.setMaximumSize(new java.awt.Dimension(400, 500));
-
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("ENDOSKOPI SISTEM");
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 70)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("MED1");
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/icon  300px.png"))); // NOI18N
 
         javax.swing.GroupLayout RightLayout = new javax.swing.GroupLayout(Right);
         Right.setLayout(RightLayout);
         RightLayout.setHorizontalGroup(
             RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RightLayout.createSequentialGroup()
-                .addContainerGap(103, Short.MAX_VALUE)
-                .addGroup(RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addGap(96, 96, 96))
+            .addGroup(RightLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jLabel6)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         RightLayout.setVerticalGroup(
             RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RightLayout.createSequentialGroup()
-                .addContainerGap(159, Short.MAX_VALUE)
+            .addGroup(RightLayout.createSequentialGroup()
+                .addGap(198, 198, 198)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addGap(229, 229, 229))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
 
         jPanel1.add(Right);
-        Right.setBounds(0, 0, 400, 501);
+        Right.setBounds(0, 0, 400, 500);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel1.setText("LOGIN");
@@ -285,7 +282,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

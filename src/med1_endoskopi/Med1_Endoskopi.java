@@ -31,7 +31,7 @@ public class Med1_Endoskopi {
 
     public static void main(String[] args) {
          try {
-            File file = new File("data.txt");
+            File file = new File("./src/test.txt");
             boolean openEncrypt = false;
             String fileUUID2 = null; // UUID yang dibaca dari file
             String fileUUID = null;
@@ -68,7 +68,7 @@ public class Med1_Endoskopi {
             }
 
             // Periksa apakah UUID cocok
-            if (fileUUID2 == null  || !fileUUID2.equals(UUID)) {
+            if (fileUUID2 == null  || !fileUUID2.equals(test)) {
                 System.out.println("UUID tidak cocok. Mengirim UUID baru ke API...");
                 postUUIDToAPI(UUID);
                 Encrypt enc = new Encrypt();
