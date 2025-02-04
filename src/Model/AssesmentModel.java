@@ -17,7 +17,10 @@ public class AssesmentModel {
     private String gambar_enam;
     private String gambar_tujuh;
     private String gambar_delapan;
+    private String gambar_sembilan;
     private int id_user;
+    private int id_pasien;
+
 
 
     public String getNama() {
@@ -115,6 +118,14 @@ public class AssesmentModel {
     public void setGambar_delapan(String gambar_delapan) {
         this.gambar_delapan = gambar_delapan;
     }
+    
+    public String getGambar_sembilan() {
+        return gambar_sembilan;
+    }
+
+    public void setGambar_sembilan(String gambar_sembilan) {
+        this.gambar_sembilan = gambar_sembilan;
+    }
 
     public int getId_user() {
         return id_user;
@@ -123,6 +134,16 @@ public class AssesmentModel {
     public void setId_user(int id_user) {
         this.id_user = id_user;
     }
+
+    public int getId_pasien() {
+        return id_pasien;
+    }
+
+    public void setId_pasien(int id_pasien) {
+        this.id_pasien = id_pasien;
+    }
+    
+    
     
     
     

@@ -18,7 +18,6 @@ public class RegisterUserDaoImpl implements RegisterUsersDao{
         ps.setString(3, registerUsers.getFullName());
         
         ps.executeUpdate();
-        
     }
     
 }

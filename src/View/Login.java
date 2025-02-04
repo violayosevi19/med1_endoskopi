@@ -5,6 +5,8 @@
 package View;
 
 import Controller.LoginController;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -17,6 +19,8 @@ public class Login extends javax.swing.JFrame {
     LoginController controller;
     public Login() {
         initComponents();
+//        Image icon = new ImageIcon(getClass().getResource("/icon/icon.png")).getImage(); 
+//        this.setIconImage(icon);
         controller = new LoginController(this);
         
     }
@@ -60,32 +64,35 @@ public class Login extends javax.swing.JFrame {
         btnRegister = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
+        setIconImages(null);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(null);
 
-        Right.setBackground(new java.awt.Color(102, 102, 0));
+        Right.setBackground(new java.awt.Color(255, 255, 153));
         Right.setMaximumSize(new java.awt.Dimension(400, 500));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/company.png"))); // NOI18N
-        jLabel6.setText("jLabel6");
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 70)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/icon  300px.png"))); // NOI18N
 
         javax.swing.GroupLayout RightLayout = new javax.swing.GroupLayout(Right);
         Right.setLayout(RightLayout);
         RightLayout.setHorizontalGroup(
             RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RightLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(jLabel6)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         RightLayout.setVerticalGroup(
             RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RightLayout.createSequentialGroup()
-                .addGap(187, 187, 187)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addGap(198, 198, 198)
+                .addComponent(jLabel6)
+                .addContainerGap(240, Short.MAX_VALUE))
         );
 
         jPanel1.add(Right);
@@ -114,8 +121,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btnLogin.setBackground(new java.awt.Color(102, 102, 0));
-        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogin.setBackground(new java.awt.Color(51, 51, 255));
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
