@@ -19,6 +19,8 @@ import java.util.Enumeration;
 import java.util.UUID;
 import javax.swing.JOptionPane;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 /**
  *
  * @author user
@@ -30,30 +32,51 @@ import java.io.OutputStream;
 public class Med1_Endoskopi {
 
     public static void main(String[] args) {
-         try {
+//        String uqcode = null;
+//        try {
+//            Process process = Runtime.getRuntime().exec("cmd /c vol");
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+////            String line;
+//            while ((uqcode = reader.readLine()) != null) {
+//                if (uqcode.contains("Volume Serial Number")) {
+//                    System.out.println(uqcode);
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        try {
             File file = new File("./src/test.txt");
             boolean openEncrypt = false;
             String fileUUID2 = null; // UUID yang dibaca dari file
             String fileUUID = null;
             String test = "MEDIUTAMA-UTAMA-MEDI-2025";
-            
+
             String generatedUUID = getUniqueCode(); // UUID baru yang dihasilkan
             String UUID = generatedUUID; // UUID kedua dari file
-             System.out.println(UUID);
-
+            System.out.println(UUID);
+            
             // Membaca file jika ada
             if (file.exists()) {
                 try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                    
+
+                    
                     String line;
+                     
                     while ((line = reader.readLine()) != null) {
+//                        System.out.println(line.startsWith(""));
                         if (line.startsWith("equal Code:")) {
+                            System.out.println(line);
                             try {
+                                System.out.println("sad");
                                 fileUUID = line.split(":")[1].trim(); // Memasukkan UUID yang ditemukan
                             } catch (Exception e) {
                                 break;
                             }
                         }
                         if (line.startsWith("Unique Code:")) {
+                             System.out.println("sadw");
                             fileUUID2 = line.split(":")[1].trim(); // Memasukkan UUID kedua
                             break;
                         }
@@ -68,9 +91,30 @@ public class Med1_Endoskopi {
             }
 
             // Periksa apakah UUID cocok
-            if (fileUUID2 == null  || !fileUUID2.equals(test)) {
+            
+            if (fileUUID2 == null || !fileUUID2.equals(test)) {
                 System.out.println("UUID tidak cocok. Mengirim UUID baru ke API...");
+                System.out.println(test);
+                System.out.println(fileUUID2);
                 postUUIDToAPI(UUID);
+                Encrypt enc = new Encrypt();
+                enc.setVisible(true);
+                enc.pack();
+                enc.setLocationRelativeTo(null);
+            }
+            String uqcode = null ;
+            BufferedReader re = new BufferedReader(new FileReader(file));
+                      while ((test = re.readLine()) != null) {
+                        if (test.contains("Volume Serial Number")) {
+                            uqcode = test;
+                            System.out.println(test);
+                        }
+                    }
+            if (fileUUID == uqcode) {
+                System.out.println(fileUUID);
+                System.out.println(uqcode);
+                System.out.println("uqcode tidak cocok. Mengirim uqcode baru ke API...");
+//                postUUIDToAPI(UUID);
                 Encrypt enc = new Encrypt();
                 enc.setVisible(true);
                 enc.pack();
@@ -111,7 +155,6 @@ public class Med1_Endoskopi {
             }
 
             // Periksa respon
-            
             int responseCode = connection.getResponseCode();
             System.out.println(responseCode);
             if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {

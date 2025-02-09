@@ -4,10 +4,13 @@
  */
 package View;
 
+import Controller.SettingController;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.NetworkInterface;
@@ -29,6 +32,8 @@ public class Encrypt extends javax.swing.JFrame {
     /**
      * Creates new form Encrypt
      */
+    SettingController controller;
+
     public Encrypt() {
         initComponents();
     }
@@ -36,7 +41,7 @@ public class Encrypt extends javax.swing.JFrame {
     public JTextField getTxtEncrypt() {
         return txtEncrypt;
     }
-    
+
     private static void postUUIDToAPI(String uuid) {
         try {
             String apiUrl = "https://your-api-url.com/endpoint"; // Ganti dengan URL API Anda
@@ -68,6 +73,7 @@ public class Encrypt extends javax.swing.JFrame {
             System.out.println("Error saat mengirim UUID ke API.");
         }
     }
+
     public static String getUniqueCode() throws Exception {
         Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
         while (networkInterfaces.hasMoreElements()) {
@@ -179,6 +185,14 @@ public class Encrypt extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 //        String generatedUUID = getUniqueCode();
+//        SettingController controller = new SettingController();
+//        controller.clearAll();
+        try {
+            controller.clearAll();
+
+        } catch (Exception ex) {
+            Logger.getLogger(Setting.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String generatedUUID = null;
         try {
             generatedUUID = getUniqueCode();
@@ -190,23 +204,39 @@ public class Encrypt extends javax.swing.JFrame {
         if (!file.exists()) {
             System.out.println("File data.txt tidak ditemukan. Membuat file baru dengan nilai default.");
         }
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                    writer.write("true"); // Menulis nilai default ke file
-                    writer.newLine();
-                    writer.write("Unique Code: " + txtEncrypt.getText());
-                    writer.newLine();
-                    writer.write("equal Code: ");
-                    System.out.println("Kode unik PC: " + txtEncrypt.getText() + " ditulis ke file.");
-                } catch (IOException ex) {
-                    Logger.getLogger(Encrypt.class.getName()).log(Level.SEVERE, null, ex);
-             }
-                 // Arahkan ke form login
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file)); BufferedReader reader = new BufferedReader(new InputStreamReader(Runtime.getRuntime().exec("cmd /c vol").getInputStream()))) {
+
+            String uqcode = null;
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("Volume Serial Number")) {
+                    uqcode = line; // Simpan nilai Volume Serial Number
+                    System.out.println(uqcode);
+                }
+            }
+
+            String test = (uqcode != null) ? uqcode : "null";
+
+            writer.write("true"); // Menulis nilai default ke file
+            writer.newLine();
+            writer.write("equal Code: " + test); // Perbaiki tanda kurung
+            writer.newLine(); // Tambahkan newline untuk keterbacaan
+            writer.write("Unique Code: " + txtEncrypt.getText());
+            writer.newLine();
+
+            System.out.println("Kode unik PC: " + txtEncrypt.getText() + " ditulis ke file.");
+        } catch (IOException ex) {
+            Logger.getLogger(Encrypt.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Arahkan ke form login
         this.dispose(); // Tutup form saat ini
         Login loginFrame = new Login();
         loginFrame.setVisible(true);
         loginFrame.pack();
         loginFrame.setLocationRelativeTo(null);
-                
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
