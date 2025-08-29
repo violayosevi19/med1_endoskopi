@@ -14,6 +14,11 @@ import java.sql.Blob;
 import javax.sql.rowset.serial.SerialBlob;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 public class AssesmentDaoImpl implements AssesmentDao{
@@ -22,40 +27,46 @@ public class AssesmentDaoImpl implements AssesmentDao{
     public void insert(AssesmentModel assesment) throws Exception {
         Koneksi koneksi = new Koneksi();
         Connection conn = koneksi.getConnection();
-        String sql = "INSERT INTO assesment(nama,keluhan,diagnosis,gambar_satu,gambar_dua,gambar_tiga,gambar_empat,gambar_lima,gambar_enam,gambar_tujuh,gambar_delapan,id_user) "
+        String sql = "INSERT INTO assesments(keluhan,diagnosis,gambar_satu,gambar_dua,gambar_tiga,gambar_empat,gambar_lima,gambar_enam,gambar_tujuh,gambar_delapan,id_user, pasien_id) "
                 + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, assesment.getNama());
-        ps.setString(2, assesment.getKeluhan());
-        ps.setString(3, assesment.getDiagnosis());
-        ps.setString(4, assesment.getGambar_satu());
-        ps.setString(5, assesment.getGambar_dua());
-        ps.setString(6, assesment.getGambar_tiga());
-        ps.setString(7, assesment.getGambar_empat());
-        ps.setString(8, assesment.getGambar_lima());
-        ps.setString(9, assesment.getGambar_enam());
-        ps.setString(10, assesment.getGambar_tujuh());
-        ps.setString(11, assesment.getGambar_delapan());
-        ps.setInt(12, assesment.getId_user());
-
+        ps.setString(1, assesment.getKeluhan());
+        ps.setString(2, assesment.getDiagnosis());
+        ps.setString(3, assesment.getGambar_satu());
+        ps.setString(4, assesment.getGambar_dua());
+        ps.setString(5, assesment.getGambar_tiga());
+        ps.setString(6, assesment.getGambar_empat());
+        ps.setString(7, assesment.getGambar_lima());
+        ps.setString(8, assesment.getGambar_enam());
+        ps.setString(9, assesment.getGambar_tujuh());
+        ps.setString(10, assesment.getGambar_delapan());
+        ps.setInt(11, assesment.getId_user());
+        ps.setInt(12, assesment.getId_pasien());
 
         ps.executeUpdate();
         
     }
 
     @Override
-    public List<String> getPasien() throws Exception {
+    public List<Object[]> getPasien() throws Exception {
         Koneksi koneksi = new Koneksi();
         Connection conn = koneksi.getConnection();
         String sql = "SELECT * FROM pasiens";
         PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
-        List<String> list = new ArrayList<>();
+//        List<String> list = new ArrayList<>();
+        List<Object[]> list = new ArrayList<>();
         while (rs.next()) {
-            list.add(rs.getString("nama")); // Ambil nama dari kolom "nama"
+            int id = rs.getInt("id");
+            String nama = rs.getString("nama");
+            list.add(new Object[]{id,nama}); // Ambil nama dari kolom "nama"
         }
 
         return list; // Kembalikan daftar nama
     }
+    
+    
+    
+    
     
 }
